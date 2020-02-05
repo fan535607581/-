@@ -153,39 +153,23 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 
 	    @Override
 	    public void run() {
-            try {
-               BufferedReader br = null;
-		br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+  
                 while(true)
 		{	
-                    int msg = 0;
-		    msg = br.read();
-			if(msg>-1)
-			{
-				message_2 = handler.obtainMessage();
-				message_2.obj = msg;
-				handler.sendMessage(message_2);
-			}
-			else
-			{
-				if(msg == -1)
-				{
-					socket.close(); 
-					br.close();
-				}
-				msg = msg + 256;
-				message_2 = handler.obtainMessage();
-				message_2.obj = msg;
-				handler.sendMessage(message_2);
-			}
-                }
-	        } catch (IOException e) {
-               message_2 = handler.obtainMessage();
+                try {	
+		int msy = 0;  byte[] b = new byte[255];	int k = 0;
+		msy = socket.getInputStream().read(b);
+		if( msy >= 0)	
+		for(int j = 0; j<(b[5]+6) ; j++)
+		{
+			message_2 = myHandler.obtainMessage();
+			message_2.obj = b[j]&0xff;
+			myHandler.sendMessage(message_2);
+		}
+		}catch (IOException e) {
+               	message_2 = handler.obtainMessage();
                 message_2.obj = "他好像不见了";
-                handler.sendMessage(message_2);
-                try{socket.close();}catch(Exception e1){}
+                handler.sendMessage(message_2);} 
+		    
 	        }
-        }
-	}
-
 }
