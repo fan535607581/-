@@ -148,10 +148,11 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    public ServerThread(Socket socket){this.socket = socket; }
 
 	    @Override
-	    public void run() {
-            try {
+	    public void run()
+	    {
                 while(true)
-		{	
+		{
+		    try {
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
 			msy = socket.getInputStream().read(b);
 			if( msy >= 0)	
@@ -161,14 +162,13 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				message_2.obj = b[j]&0xff;
 				handler.sendMessage(message_2);
 			}
+			 } catch (IOException e) {
+				message_2 = handler.obtainMessage();
+				message_2.obj = "他好像不见了";
+				handler.sendMessage(message_2);
+	        		}
+			   	    
                 }
-	        } catch (IOException e) {
-                message_2 = handler.obtainMessage();
-                message_2.obj = "他好像不见了";
-                handler.sendMessage(message_2);
-                try{socket.close();}catch(Exception e1){}
-	        }
-        }
+            }
 	}
-
 }
