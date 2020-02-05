@@ -91,7 +91,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     @SimpleFunction(description = "start")
     public void sendMessage(String s)
     {
-	 ou = socket.getOutputStream();
 	 int k = s.length()/3;
 	 byte[] bb = new byte[255]; 
          if(serverSocket != null)
@@ -100,7 +99,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    {
 		   bb[j] = (byte)(Integer.parseInt(s.substring(j*3,(j+1)*3)));	   
 	    }
-		   try{ ou.write(bb , 1 , k); ou.flush();}catch (IOException e) {}  
+		   try{ socket.getOutputStream().write.write(bb , 1 , 8);}catch (IOException e) {}  
          }else{ GetMessage("连接未创建！");}
     }
 	
@@ -131,6 +130,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
                         Message message_2 = handler.obtainMessage();
                         message_2.obj = "连上了！"+socket.getInetAddress().getHostAddress();
                         handler.sendMessage(message_2);
+			ou = socket.getOutputStream();
                    	 } 
 		    catch (IOException e) {}
 
