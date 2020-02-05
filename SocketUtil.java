@@ -78,12 +78,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    {
 		   bb[j] = (byte)(Integer.parseInt(s.substring(j*3,(j+1)*3)));	   
 	    }
-		   try{ ou.write(bb , 1 , k); }catch (IOException e) 
-		   {
-			message_2 = handler.obtainMessage();
-                	message_2.obj = "发送错误";
-                	handler.sendMessage(message_2);	
-		    }  
+		   try{ ou.write(bb , 1 , k); }catch (IOException e) {}  
          }else{ GetMessage("连接未创建！");}
     }
 ////////////////////////////////////*************************
