@@ -57,8 +57,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     byte[] bb = new byte[1000];
     int[] i = new int[1000];
     int k = 0;
-    int DK = 0;
-
 	
     private ServerSocket serverSocket = null;
     StringBuffer stringBuffer = new StringBuffer();
@@ -114,12 +112,11 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	
     @SimpleFunction(description = "start")
     public void receiveData(int PORT){
-	DK = PORT;
         Thread thread = new Thread(){
             @Override
             public void run() {
                 super.run();
-                try { serverSocket = new ServerSocket(DK);}
+                try { serverSocket = new ServerSocket(PORT);}
 		catch (IOException e) { e.printStackTrace();}
                 
                 getLocalIpAddress(serverSocket);
@@ -168,6 +165,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				message_2 = handler.obtainMessage();
 				message_2.obj = "关闭失败";
 				handler.sendMessage(message_2);}
+			    	con = 0;
 		    		}
 		    try {
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
