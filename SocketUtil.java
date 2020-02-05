@@ -53,6 +53,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     OutputStream ou = null;
     String ip;
     int port;
+    int con = 0;
+    ServerThread mt;
 	
     private ServerSocket serverSocket = null;
     StringBuffer stringBuffer = new StringBuffer();
@@ -92,13 +94,12 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     public void sendMessage(String s)
     {
 	 int k = s.length()/3;
-	 byte[] bb = new byte[255]; 
+	 byte[] bb = new byte[1000];
 	 for(int j = 0; j<k ;j++)
-	 {
-		bb[j] = (byte)(Integer.parseInt(s.substring(j*3,(j+1)*3)));	   
-	 }
-	 ou = socket.getOutputStream();
-	 try{ou.write(bb , 1 , k);}catch (IOException e) {}  
+	    {
+		   bb[j] = (Integer.parseInt(s.substring(j*3,(j+1)*3)), j , k );	   
+	    }
+            con = 1;
     }
 	
     @SimpleEvent
@@ -144,24 +145,24 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    Socket socket;
 	    Message message_2;
 	    public ServerThread(Socket socket){this.socket = socket; }
-
+		
 	    @Override
 	    public void run()
 	    {
                 while(true)
 		{
+		    if(con == 1){try{ou.write(b , 1 , 8);}catch (IOException e) {} con = 0;}  
 		    try {
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
 			msy = socket.getInputStream().read(b);
 			if( msy >= 0)	
-			{
+			{ 
 			for(int j = 0; j<(b[5]+6) ; j++)
 				{
 				message_2 = handler.obtainMessage();
 				message_2.obj = b[j]&0xff;
 				handler.sendMessage(message_2);
 				}
-				try{ou.write(b , 1 , 8);}catch (IOException e) {}  
 			}
 			 } catch (IOException e)
 		    		{
