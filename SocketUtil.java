@@ -80,9 +80,9 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    }
 		   try{ ou.write(bb , 1 , k); }catch (IOException e) 
 		   {
-			msg = myHandler.obtainMessage();
-			msg.obj = "发送错误";
-			myHandler.sendMessage(msg);	
+			message_2 = handler.obtainMessage();
+                	message_2.obj = "发送错误";
+                	handler.sendMessage(message_2);	
 		    }  
          }else{ GetMessage("连接未创建！");}
     }
