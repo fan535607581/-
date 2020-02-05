@@ -150,8 +150,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    @Override
 	    public void run() {
             try {
-               BufferedReader br = null;
-		br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 while(true)
 		{	
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
@@ -165,7 +163,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 			}
                 }
 	        } catch (IOException e) {
-               message_2 = handler.obtainMessage();
+                message_2 = handler.obtainMessage();
                 message_2.obj = "他好像不见了";
                 handler.sendMessage(message_2);
                 try{socket.close();}catch(Exception e1){}
