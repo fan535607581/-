@@ -55,6 +55,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     int port;
     int con = 0;
     byte[] bb = new byte[1000];
+    int[] i = new int[1000];
     int k = 0;
 	
     private ServerSocket serverSocket = null;
@@ -97,7 +98,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 k = s.length()/3;
 	 for(int j = 0; j<k ;j++)
 	    {
-		   bb[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));	   
+		   i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));
+		 bb[j] = (byte)i[j];
 	    }
             con = 1;
     }
