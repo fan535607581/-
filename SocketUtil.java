@@ -50,7 +50,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     private static final String LOG_TAG = "SocketUtil";
     private ComponentContainer container;
     private Context context;
-    OutputStream ou = socket.getOutputStream();
+
     String ip;
     int port;
 	
@@ -130,7 +130,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
                         Message message_2 = handler.obtainMessage();
                         message_2.obj = "连上了！"+socket.getInetAddress().getHostAddress();
                         handler.sendMessage(message_2);
-			ou = socket.getOutputStream();
+			OutputStream ou = socket.getOutputStream();
                    	 } 
 		    catch (IOException e) {}
 
