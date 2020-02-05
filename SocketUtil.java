@@ -57,6 +57,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     byte[] bb = new byte[1000];
     int[] i = new int[1000];
     int k = 0;
+    int DK = 0;
+
 	
     private ServerSocket serverSocket = null;
     StringBuffer stringBuffer = new StringBuffer();
@@ -112,7 +114,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	
     @SimpleFunction(description = "start")
     public void receiveData(int port){
-	int DK = port;
+	DK = port;
         Thread thread = new Thread(){
             @Override
             public void run() {
