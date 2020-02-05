@@ -72,7 +72,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     {  
 	 int k = s.length()/3;
 	 byte[] bb = new byte[255]; 
-         if(socket != null)
+         if(serverSocket != null)
 	 {
 	    for(int j = 0; j<k ;j++)
 	    {
