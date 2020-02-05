@@ -172,4 +172,3 @@ public class SocketUtil extends AndroidNonvisibleComponent {
                 handler.sendMessage(message_2);} 
 		    
 	        }
-}
