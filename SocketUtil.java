@@ -50,7 +50,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     private static final String LOG_TAG = "SocketUtil";
     private ComponentContainer container;
     private Context context;
-    OutputStream ou = socket.getOutputStream();;
+    OutputStream ou = socket.getOutputStream();
     String ip;
     int port;
 	
