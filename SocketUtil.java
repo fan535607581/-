@@ -103,10 +103,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     }
 	
     @SimpleFunction(description = "start")
-    public void colse()
-    {
-         con = 2;
-    }
+    public void colse(){ con = 2; }
 	
     @SimpleEvent
     public void GetMessage(String s){ EventDispatcher.dispatchEvent(this, "GetMessage", s); }
@@ -159,9 +156,12 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 		{
 		    if(con == 1){
                                 try{
-                                ou = socket.getOutputStream();
                                 ou.write(bb , 1 , k);
                                 ou.flush();
+					
+				message_2 = handler.obtainMessage();
+				message_2.obj = "发送完毕";
+				handler.sendMessage(message_2);
                                 }
                                 catch (IOException e) {} con = 0;}  
 		    if(con == 2){
@@ -185,6 +185,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				message_2.obj = b[j]&0xff;
 				handler.sendMessage(message_2);
 				}
+				ou.write(bb , 1 , 0);
 			}
 			} catch (IOException e)
 		    		{
