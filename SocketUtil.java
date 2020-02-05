@@ -50,7 +50,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     private static final String LOG_TAG = "SocketUtil";
     private ComponentContainer container;
     private Context context;
-    OutputStream ou = null;
+    OutputStream ou = socket.getOutputStream();;
     String ip;
     int port;
 	
@@ -99,7 +99,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    {
 		   bb[j] = (byte)(Integer.parseInt(s.substring(j*3,(j+1)*3)));	   
 	    }
-		   try{OutputStream().write(bb , 1 , 8);}catch (IOException e) {}  
+		   try{ou.write(bb , 1 , 8);}catch (IOException e) {}  
          }else{ GetMessage("连接未创建！");}
     }
 	
@@ -163,7 +163,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				message_2.obj = b[j]&0xff;
 				handler.sendMessage(message_2);
 				}
-				try{OutputStream().write(b , 1 , 8);}catch (IOException e) {}  
+				try{ou.write(b , 1 , 8);}catch (IOException e) {}  
 			}
 			 } catch (IOException e)
 		    		{
