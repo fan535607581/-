@@ -113,7 +113,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
             @Override
             public void run() {
                 super.run();
-                try { serverSocket = new ServerSocket(8000); }
+                try { serverSocket = new ServerSocket(8000);ou = socket.getOutputStream(); }
 		catch (IOException e) { e.printStackTrace();}
                 
                 getLocalIpAddress(serverSocket);
