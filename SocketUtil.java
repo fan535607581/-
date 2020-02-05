@@ -156,9 +156,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 		{
 		    if(con == 1){
                                 try{
-                                ou.write(bb , 1 , k);
-                                ou.flush();
-					
+				con = 0;
+                                ou.write(bb , 1 , k);	
 				message_2 = handler.obtainMessage();
 				message_2.obj = "发送完毕";
 				handler.sendMessage(message_2);
@@ -166,16 +165,15 @@ public class SocketUtil extends AndroidNonvisibleComponent {
                                 catch (IOException e) {}}  
 		    if(con == 2){
 			    	try{
+				con = 0;
 			    	ou.close();
-                                inputStream.close();
+                                //inputStream.close();
                                 socket.close();
                                 message_2 = handler.obtainMessage();
 				message_2.obj = "服务器端已关闭";
 				handler.sendMessage(message_2);
 				}
-				catch (IOException e){}}
-		    if(con != 0) con = 0;
-			
+				catch (IOException e){}}			
 		    try {
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
 			msy = socket.getInputStream().read(b);
@@ -187,7 +185,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				message_2.obj = b[j]&0xff;
 				handler.sendMessage(message_2);
 				}
-				new ServerThread(socket).start();
 			}
 			} catch (IOException e)
 		    		{
