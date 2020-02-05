@@ -62,12 +62,9 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     public Handler handler = new Handler()
     {
         @Override
-        public void handleMessage(Message msg)
-	{
-        	GetMessage(msg.obj.toString());
-        }
+        public void handleMessage(Message msg){ GetMessage(msg.obj.toString()); }
     };
-/////////////////////////////////////////////******************
+
     public void sendMessage(String s)
     {  
 	 int k = s.length()/3;
@@ -81,7 +78,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 		   try{ ou.write(bb , 1 , k); }catch (IOException e) {}  
          }else{ GetMessage("连接未创建！");}
     }
-////////////////////////////////////*************************
+	
     public SocketUtil(ComponentContainer container) 
     {
         super(container.$form());
@@ -106,9 +103,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
    }
 
     @SimpleEvent
-    public void GetMessage(String s){
-        EventDispatcher.dispatchEvent(this, "GetMessage", s);
-    }
+    public void GetMessage(String s){ EventDispatcher.dispatchEvent(this, "GetMessage", s); }
+	
     @SimpleFunction(description = "start")
     public void receiveData(){
 
@@ -141,8 +137,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
             }
         };
         thread.start();
-
-    }
+ }
 
 	class ServerThread extends Thread{
 
@@ -170,5 +165,9 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 			 message_2.obj = "接收错误";
 			 handler.sendMessage(message_2);}
                 }
+	    }
+	}
+}
+}
 	       
 }
