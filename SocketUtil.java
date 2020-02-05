@@ -54,7 +54,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     String ip;
     int port;
     int con = 0;
-    ServerThread mt;
+    byte[] bb = new byte[1000];
+    int k = 0;
 	
     private ServerSocket serverSocket = null;
     StringBuffer stringBuffer = new StringBuffer();
@@ -93,11 +94,10 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     @SimpleFunction(description = "start")
     public void sendMessage(String s)
     {
-	 int k = s.length()/3;
-	 byte[] bb = new byte[1000];
+	 k = s.length()/3;
 	 for(int j = 0; j<k ;j++)
 	    {
-		   bb[j] = (Integer.parseInt(s.substring(j*3,(j+1)*3)), j , k );	   
+		   bb[j] = Integer.parseInt(s.substring(j*3,(j+1)*3))	   
 	    }
             con = 1;
     }
@@ -151,7 +151,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    {
                 while(true)
 		{
-		    if(con == 1){try{ou.write(b , 1 , 8);}catch (IOException e) {} con = 0;}  
+		    if(con == 1){try{ou.write(bb , 1 , k);}catch (IOException e) {} con = 0;}  
 		    try {
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
 			msy = socket.getInputStream().read(b);
