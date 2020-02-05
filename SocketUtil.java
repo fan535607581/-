@@ -65,6 +65,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
         public void handleMessage(Message msg){ GetMessage(msg.obj.toString()); }
     };
 
+    @SimpleFunction(description = "start")
     public void sendMessage(String s)
     {  
 	 int k = s.length()/3;
