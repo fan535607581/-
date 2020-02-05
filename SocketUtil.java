@@ -93,14 +93,11 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     {
 	 int k = s.length()/3;
 	 byte[] bb = new byte[255]; 
-         if(serverSocket != null)
+	 for(int j = 0; j<k ;j++)
 	 {
-	    for(int j = 0; j<k ;j++)
-	    {
-		   bb[j] = (byte)(Integer.parseInt(s.substring(j*3,(j+1)*3)));	   
-	    }
-		   try{ou.write(bb , 1 , 8);}catch (IOException e) {}  
-         }else{ GetMessage("连接未创建！");}
+		bb[j] = (byte)(Integer.parseInt(s.substring(j*3,(j+1)*3)));	   
+	 }
+	 try{ou.write(bb , 1 , k);}catch (IOException e) {}  
     }
 	
     @SimpleEvent
