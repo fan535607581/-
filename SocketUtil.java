@@ -111,7 +111,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     public void GetMessage(String s){ EventDispatcher.dispatchEvent(this, "GetMessage", s); }
 	
     @SimpleFunction(description = "start")
-    public void receiveData(String port){
+    public void receiveData(int port){
 	int DK = port;
         Thread thread = new Thread(){
             @Override
