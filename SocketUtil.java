@@ -113,8 +113,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     public void GetMessage(String s){ EventDispatcher.dispatchEvent(this, "GetMessage", s); }
 	
     @SimpleFunction(description = "start")
-    public void receiveData(int port){
-	DK = port;
+    public void receiveData(int PORT){
+	DK = PORT;
         Thread thread = new Thread(){
             @Override
             public void run() {
@@ -159,7 +159,16 @@ public class SocketUtil extends AndroidNonvisibleComponent {
                 while(true)
 		{
 		    if(con == 1){try{ou.write(bb , 1 , k);}catch (IOException e) {} con = 0;}  
-		    if(con == 2){ou.close(); serverSocket.close();}
+		    if(con == 2){
+			    	try{
+			    	ou.close(); 
+				serverSocket.close();
+				}
+				catch (IOException e){
+				message_2 = handler.obtainMessage();
+				message_2.obj = "关闭失败";
+				handler.sendMessage(message_2);}
+		    		}
 		    try {
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
 			msy = socket.getInputStream().read(b);
