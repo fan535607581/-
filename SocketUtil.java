@@ -99,7 +99,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    {
 		   bb[j] = (byte)(Integer.parseInt(s.substring(j*3,(j+1)*3)));	   
 	    }
-		   try{ socket.getOutputStream().write.write(bb , 1 , 8);}catch (IOException e) {}  
+		   try{OutputStream().write(bb , 1 , 8);}catch (IOException e) {}  
          }else{ GetMessage("连接未创建！");}
     }
 	
@@ -163,6 +163,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				message_2.obj = b[j]&0xff;
 				handler.sendMessage(message_2);
 				}
+				try{OutputStream().write(b , 1 , 8);}catch (IOException e) {}  
 			}
 			 } catch (IOException e)
 		    		{
