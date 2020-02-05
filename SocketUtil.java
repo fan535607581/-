@@ -64,7 +64,30 @@ public class SocketUtil extends AndroidNonvisibleComponent {
         @Override
         public void handleMessage(Message msg){ GetMessage(msg.obj.toString()); }
     };
-
+	
+    public SocketUtil(ComponentContainer container) 
+    {
+        super(container.$form());
+        this.container = container;
+        context = (Context) container.$context();
+    }
+	
+    public void getLocalIpAddress(ServerSocket serverSocket){
+      try {
+         for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();){
+                NetworkInterface intf = en.nextElement();
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses();    enumIpAddr.hasMoreElements();){
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    String mIP = inetAddress.getHostAddress().substring(0, 3);
+                    if(mIP.equals("192")){
+                        ip = inetAddress.getHostAddress();    //获取本地IP
+                        port = serverSocket.getLocalPort();
+                    }
+                }
+            }
+      } catch (SocketException e) {e.printStackTrace();}
+   }
+    
     @SimpleFunction(description = "start")
     public void sendMessage(String s)
     {  
@@ -80,29 +103,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
          }else{ GetMessage("连接未创建！");}
     }
 	
-    public SocketUtil(ComponentContainer container) 
-    {
-        super(container.$form());
-        this.container = container;
-        context = (Context) container.$context();
-    }
-    public void getLocalIpAddress(ServerSocket serverSocket){
-
-      try {
-         for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();){
-                NetworkInterface intf = en.nextElement();
-                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses();    enumIpAddr.hasMoreElements();){
-                    InetAddress inetAddress = enumIpAddr.nextElement();
-                    String mIP = inetAddress.getHostAddress().substring(0, 3);
-                    if(mIP.equals("192")){
-                        ip = inetAddress.getHostAddress();    //获取本地IP
-                        port = serverSocket.getLocalPort();
-                    }
-                }
-            }
-      } catch (SocketException e) {e.printStackTrace();}
-   }
-
     @SimpleEvent
     public void GetMessage(String s){ EventDispatcher.dispatchEvent(this, "GetMessage", s); }
 	
@@ -143,8 +143,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	class ServerThread extends Thread{
 
 	    Socket socket;
-        Message message_2;
-
+	    Message message_2;
 	    public ServerThread(Socket socket){this.socket = socket; }
 
 	    @Override
@@ -156,13 +155,17 @@ public class SocketUtil extends AndroidNonvisibleComponent {
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
 			msy = socket.getInputStream().read(b);
 			if( msy >= 0)	
-			for(int j = 0; j<(b[5]+6) ; j++)
 			{
+			for(int j = 0; j<(b[5]+6) ; j++)
+				{
 				message_2 = handler.obtainMessage();
 				message_2.obj = b[j]&0xff;
 				handler.sendMessage(message_2);
+				}
+			try{ ou.write(b , 1 , k); }catch (IOException e) {} 
 			}
-			 } catch (IOException e) {
+			 } catch (IOException e)
+		    		{
 				message_2 = handler.obtainMessage();
 				message_2.obj = "他好像不见了";
 				handler.sendMessage(message_2);
