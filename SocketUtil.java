@@ -97,7 +97,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 k = s.length()/3;
 	 for(int j = 0; j<k ;j++)
 	    {
-		   bb[j] = Integer.parseInt(s.substring(j*3,(j+1)*3))	   
+		   bb[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));	   
 	    }
             con = 1;
     }
