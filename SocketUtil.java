@@ -38,7 +38,7 @@ import java.util.Enumeration;
 
 
 @DesignerComponent(version = SocketUtil.VERSION,
-    description = "made in fan hao jie \n QQ:535607581@qq.com ",
+    description = "made in fan hao jie \n QQ:535607581",
     category = ComponentCategory.EXTENSION,
     nonVisible = true,
     iconName = "images/extension.png")
