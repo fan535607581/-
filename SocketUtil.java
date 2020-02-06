@@ -153,14 +153,14 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 			 ou = socket.getOutputStream();
 			 ou.write(bb , 1 , k); 
 			 ou.flush();
-			 con == 0;}catch (IOException e) {}
+			 con = 0;}catch (IOException e) {}
 		    if(con == 2)
 		     try{
 			 ou.colse();
 			 socket.colse();
 			 msy.colse();
 			 serverSocket.colse();
-			 con == 0;}catch (IOException e) {}
+			 con = 0;}catch (IOException e) {}
 			
 		    try {
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
