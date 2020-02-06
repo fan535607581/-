@@ -154,9 +154,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
                 while(true)
 		{
 		    try{if(con == 1){
-			    message_2 = handler.obtainMessage();
-			    message_2.obj = "发送完毕001";
-			    handler.sendMessage(message_2);
 			    ou = socket.getOutputStream();
 			    ou.write(bb , 1 , k); 
 			    ou.flush(); con = 0;}}
@@ -173,6 +170,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				message_2.obj = b[j]&0xff;
 				handler.sendMessage(message_2);
 				}
+				msy.colse();
 			}
 			} catch (IOException e)
 		    		{
