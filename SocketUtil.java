@@ -97,7 +97,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
 	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];}
 	 try{if(con == 1){
-	 ou = socket.getOutputStream();
 	 ou.write(bb , 1 , k); 
 	 ou.flush(); }}
 	 catch (IOException e) {}
@@ -164,6 +163,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				message_2.obj = b[j]&0xff;
 				handler.sendMessage(message_2);
 				}
+			ou = socket.getOutputStream();
 			}
 			} catch (IOException e){}
 			   	    
