@@ -93,7 +93,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     @SimpleFunction(description = "start")//软件向控件写回复信息
     public void sendMessage(String s)
     {
-	 Stringint m = s;
+	 String m = s;
 	 Thread thread = new Thread(){
          @Override
          public void run() {
