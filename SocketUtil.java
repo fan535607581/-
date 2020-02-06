@@ -58,6 +58,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     int[] i = new int[1000];
     int k = 0;
     int DK = 0;
+    String m = null;
 		
     private ServerSocket serverSocket = null;
 
@@ -93,7 +94,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     @SimpleFunction(description = "start")//软件向控件写回复信息
     public void sendMessage(String s)
     {
-	 String m = s;
+	 m = s;
 	 Thread thread = new Thread(){
          @Override
          public void run() {
