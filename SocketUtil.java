@@ -154,29 +154,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    {
                 while(true)
 		{
-		    if(con == 1){
-                                try{
-                                ou.write(bb , 1 , k);	con = 0;
-                                }
-                                catch (IOException e) 
-				{
-					message_2 = handler.obtainMessage();
-					message_2.obj = "发送失败";
-					handler.sendMessage(message_2);
-				}}  
-			/*****************
-		    if(con == 2){
-			    	try{
-				con = 0;
-			    	ou.close();
-                                //inputStream.close();
-                                socket.close();
-                                message_2 = handler.obtainMessage();
-				message_2.obj = "服务器端已关闭";
-				handler.sendMessage(message_2);
-				}
-				catch (IOException e){}}
-				*////////////////////
+	
 		    try {
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
 			msy = socket.getInputStream().read(b);
@@ -189,6 +167,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				handler.sendMessage(message_2);
 				}
 			}
+			 else{if(con == 1){try{ou.write(bb , 1 , k); con = 0;}catch (IOException e) {}}}
 			} catch (IOException e)
 		    		{
 				message_2 = handler.obtainMessage();
