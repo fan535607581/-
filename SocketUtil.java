@@ -100,7 +100,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     }
 	
     @SimpleFunction(description = "start")//关闭通信端口
-    public void colse(){ con = 2; }
+    public void close(){ con = 2; }
 	
     @SimpleEvent//向软件输出信息
     public void GetMessage(String s){ EventDispatcher.dispatchEvent(this, "GetMessage", s); }
@@ -156,10 +156,10 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 			 con = 0;}catch (IOException e) {}
 		    if(con == 2)
 		     try{
-			 ou.colse();
-			 socket.colse();
-			 msy.colse();
-			 serverSocket.colse();
+			 ou.close();
+			 socket.close();
+			 msy.close();
+			 serverSocket.close();
 			 con = 0;}catch (IOException e) {}
 			
 		    try {
