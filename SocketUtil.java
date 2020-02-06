@@ -58,7 +58,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     int[] i = new int[1000];
     int k = 0;
     int DK = 0;
-    String m = null;
 		
     private ServerSocket serverSocket = null;
 
@@ -94,19 +93,10 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     @SimpleFunction(description = "start")//软件向控件写回复信息
     public void sendMessage(String s)
     {
-	 m = s;
-	 Thread thread = new Thread(){
-         @Override
-         public void run() {
-         super.run();
-	 k = m.length()/3;
-	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(m.substring(j*3,(j+1)*3));}
+	 k = s.length()/3;
+	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
 	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];}
-	 try{
-	 ou.write(bb , 1 , k); 
-	 ou.flush(); 
-	 }catch (IOException e) {}
-         }};
+	 con = 1;
     }
 	
     @SimpleFunction(description = "start")//关闭通信端口
@@ -138,8 +128,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
                         Message message_2 = handler.obtainMessage();
                         message_2.obj = "连上了！"+socket.getInetAddress().getHostAddress();
                         handler.sendMessage(message_2);
-			ou = null;
-			ou = socket.getOutputStream();
                    	 } 
 		    catch (IOException e) {}
                     new ServerThread(socket).start();
@@ -160,7 +148,20 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    {
                 while(true)
 		{
-		    
+		     if(con == 1)
+		     try{
+			 ou = socket.getOutputStream();
+			 ou.write(bb , 1 , k); 
+			 ou.flush();
+			 con == 0;}catch (IOException e) {}
+		    if(con == 2)
+		     try{
+			 ou.colse();
+			 socket.colse();
+			 msy.colse();
+			 serverSocket.colse();
+			 con == 0;}catch (IOException e) {}
+			
 		    try {
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
 			msy = socket.getInputStream().read(b);
