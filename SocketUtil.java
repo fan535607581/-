@@ -58,10 +58,9 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     int[] i = new int[1000];
     int k = 0;
     int DK = 0;
-	
-    //StringBuffer stringBuffer = new StringBuffer();	
+		
     private ServerSocket serverSocket = null;
-    private InputStream inputStream;
+    //private InputStream inputStream;
 
     public Handler handler = new Handler()
     {
@@ -118,7 +117,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 		catch (IOException e) { e.printStackTrace();}
                 
                 getLocalIpAddress(serverSocket);
-
                 Message message_1 = handler.obtainMessage();
                 message_1.obj = "IP:" + ip + " PORT: " + port;
                 handler.sendMessage(message_1);
@@ -155,13 +153,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    {
                 while(true)
 		{
-		    try{if(con == 1){
-			    ou = socket.getOutputStream();
-			    ou.write(bb , 1 , k); 
-			    ou.flush(); 
-			    con = 0;}}
-			catch (IOException e) {}
-		    if(con == 0)
 		    try {
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
 			msy = socket.getInputStream().read(b);
@@ -173,7 +164,14 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				message_2.obj = b[j]&0xff;
 				handler.sendMessage(message_2);
 				}
-				con = 3;
+			con = 0;
+			while(con == 0);
+		    	try{if(con == 1){
+			    ou = socket.getOutputStream();
+			    ou.write(bb , 1 , k); 
+			    ou.flush(); 
+			    con = 0;}}
+			catch (IOException e) {}
 			}
 			} catch (IOException e)
 		    		{
