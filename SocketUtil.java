@@ -93,16 +93,16 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     @SimpleFunction(description = "start")//软件向控件写回复信息
     public void sendMessage(String s)
     {
-	 int m = 0;
+	 Stringint m = s;
 	 Thread thread = new Thread(){
          @Override
          public void run() {
          super.run();
-	 m = s.length()/3;
-	 for(int j = 0; j<m ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
-	 for(int j = 0; j<m+1 ;j++){bb[j+1] = (byte)i[j];}
+	 k = m.length()/3;
+	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(m.substring(j*3,(j+1)*3));}
+	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];}
 	 try{
-	 ou.write(bb , 1 , m); 
+	 ou.write(bb , 1 , k); 
 	 ou.flush(); 
 	 }catch (IOException e) {}
          }};
