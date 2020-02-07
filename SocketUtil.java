@@ -131,7 +131,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
                     try {
                         socket = serverSocket.accept(); socket2 = socket;
                         Message message_2 = handler.obtainMessage();
-                        message_2.obj = "连上了！"+socket.getInetAddress().getHostAddress();
+                        message_2.obj = "连上了！"+socket.getInetAddress().getHostAddress()+socket+socket2;
                         handler.sendMessage(message_2);
                    	 } 
 		    catch (IOException e) {}
@@ -157,6 +157,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
                        ou.write(bb , 1 , k);
                        ou.flush();
                        con=0;}}catch (IOException e) {}
+			
 		    try {
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
 			msy = socket.getInputStream().read(b);
