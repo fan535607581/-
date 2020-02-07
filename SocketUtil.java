@@ -106,7 +106,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	
     @SimpleFunction(description = "start")//打开通信端口
     public void receiveData(int PORT){
-	Message message_2; DK = PORT;
+	DK = PORT;
         Thread thread = new Thread(){
             @Override
             public void run() {
@@ -115,9 +115,9 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 		catch (IOException e) { e.printStackTrace();}
                 
                 getLocalIpAddress(serverSocket);
-                message_2 = handler.obtainMessage();
-                message_2.obj = "IP:" + ip + " PORT: " + port;
-                handler.sendMessage(message_2);
+                Message message_1 = handler.obtainMessage();
+                message_1.obj = "IP:" + ip + " PORT: " + port;
+                handler.sendMessage(message_1);
 
                 while (true)
 		{
