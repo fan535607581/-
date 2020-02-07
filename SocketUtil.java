@@ -129,7 +129,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
                         handler.sendMessage(message_2);
                    	 } 
 		    catch (IOException e) {}
-			message_2 = handler.obtainMessage();
+			Message message_2 = handler.obtainMessage();
 			message_2.obj = "标记002";
 			handler.sendMessage(message_2);
                     new ServerThread(socket).start();
