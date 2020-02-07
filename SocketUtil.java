@@ -94,7 +94,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     public void sendMessage(String s)
     {
 	 Message message_2 = handler.obtainMessage();
-         message_2.obj = "正在发送"
+         message_2.obj = "正在发送";
          handler.sendMessage(message_2);
 	 k = s.length()/3;
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
