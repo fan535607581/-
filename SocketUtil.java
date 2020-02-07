@@ -103,7 +103,11 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 try{
 	 ou = socket.getOutputStream();
          ou.write(bb , 1 , k);
-	 }catch (IOException e) {}
+	 }catch (IOException e) {
+	 Message message_2 = handler.obtainMessage();
+         message_2.obj = "发送失败";
+         handler.sendMessage(message_2); 
+	 }
     }
     @SimpleFunction(description = "start")//关闭通信端口
     public void close(){ con = 2; }
@@ -144,7 +148,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
  }
 	
 	class ServerThread extends Thread{
-	    //Socket socket; 
+	    Socket socket; 
 	    Message message_2;
 	    public ServerThread(Socket socket){this.socket = socket; }	
 	    @Override
