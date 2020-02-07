@@ -166,7 +166,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				}
                                while(con != 3)
                                {
-                              try{ if(con == 1){ou = socket.getOutputStream();ou.write(bb , 1 , 10);con=3}}
+                              try{ if(con == 1){ou = socket.getOutputStream();ou.write(bb , 1 , k);con=3;}}
                               catch (IOException e){}
                                }
                               con=0;
