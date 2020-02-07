@@ -46,22 +46,21 @@ import java.util.Enumeration;
 @SimpleObject(external = true)
 
 public class SocketUtil extends AndroidNonvisibleComponent {
-    public static final int VERSION = 1;
+    public static final int VERSION = 1;//控件版本号
     private static final String LOG_TAG = "SocketUtil";
     private ComponentContainer container;
     private Context context;
-    OutputStream ou = null;
-    Socket socket = null;
-    String ip;
-    int port;
-    int con = 0;
-    byte[] bb = new byte[1000];
-    int[] i = new int[1000];
-    int k = 0;
-    int DK = 0;
-		
     private ServerSocket serverSocket = null;
-
+    OutputStream ou = null;//系统输出流
+	
+    String ip;//系统返回IP地址
+    int port;//系统返回端口
+    int con = 0;//控制信号
+    byte[] bb = new byte[1000];//回复数据
+    int[] i = new int[1000];//回复原始数据
+    int k = 0;//回复数据的长度
+    int DK = 0;//外部设置的端口
+		
     public Handler handler = new Handler()
     {
         @Override
@@ -88,7 +87,13 @@ public class SocketUtil extends AndroidNonvisibleComponent {
                     }
                 }
             }
-      } catch (SocketException e) {e.printStackTrace();}
+      } 
+	    //catch (SocketException e) {e.printStackTrace();}
+	    catch (IOException e) {
+		 Message message_2 = handler.obtainMessage();
+		 message_2.obj = "端口已被占用";
+		 handler.sendMessage(message_2); 
+		 }
    }
     
     @SimpleFunction(description = "start")//软件向控件写回复信息
