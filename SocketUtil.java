@@ -51,7 +51,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     private ComponentContainer container;
     private Context context;
     OutputStream ou = null;
-    Socket socket2 = null;
+    Socket socket = null;
     String ip;
     int port;
     int con = 0;
@@ -101,10 +101,9 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
 	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];}
 	 try{
-	 ou = socket2.getOutputStream();
+	 ou = socket.getOutputStream();
          ou.write(bb , 1 , k);
 	 }catch (IOException e) {}
-	 //con = 1;
     }
     @SimpleFunction(description = "start")//关闭通信端口
     public void close(){ con = 2; }
@@ -129,9 +128,9 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 
                 while (true)
 		{
-                    Socket socket = null;
+                   // Socket socket = null;
                     try {
-                        socket = serverSocket.accept(); socket2=socket;
+                        socket = serverSocket.accept();
                         Message message_2 = handler.obtainMessage();
                         message_2.obj = "连上了！"+socket.getInetAddress().getHostAddress();
                         handler.sendMessage(message_2);
@@ -145,21 +144,14 @@ public class SocketUtil extends AndroidNonvisibleComponent {
  }
 	
 	class ServerThread extends Thread{
-	    Socket socket;  Message message_2;
+	    //Socket socket; 
+	    Message message_2;
 	    public ServerThread(Socket socket){this.socket = socket; }	
 	    @Override
 	    public void run()
 	    {
                 while(true)
 		{
-                    try{
-                        if(con == 1)
-                        {
-                              ou = socket.getOutputStream();
-                              ou.write(bb , 1 , k);
-                              con=0;
-                         }
-                        }catch (IOException e){}
 		    try {
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
 			msy = socket.getInputStream().read(b);
