@@ -97,7 +97,23 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
 	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];}
 	 con = 1;
-    }
+	 Thread thread = new Thread()
+	 {
+	    @Override
+            public void run() 
+	    {
+            super.run();
+		    while(true)
+		    {
+		    try{
+			 if(con == 1){
+			 ou = socket.getOutputStream();
+			 ou.write(bb , 1 , k); 
+			 con = 0;}
+		       }catch (IOException e) {}
+		    }
+	    }			   	    
+   	};
 	
     @SimpleFunction(description = "start")//关闭通信端口
     public void close(){ con = 2; }
@@ -161,20 +177,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				}
 			}
 			} catch (IOException e){}
-			 
-		     try{
-			 if(con == 1){
-			 ou = socket.getOutputStream();
-			 ou.write(bb , 1 , k); 
-			 ou.flush();
-			 con = 0;}}catch (IOException e) {}
-		    if(con == 2)
-		     try{
-			 ou.close();
-			 socket.close();
-			 serverSocket.close();
-			 con = 0;}catch (IOException e) {}
-			   	    
                 }
             }
 	}
