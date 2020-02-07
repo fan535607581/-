@@ -87,24 +87,19 @@ public class SocketUtil extends AndroidNonvisibleComponent {
                     }
                 }
             }
-      } 
-	    //catch (SocketException e) {e.printStackTrace();}
-	    catch (IOException e) {
-		 Message message_2 = handler.obtainMessage();
-		 message_2.obj = "端口已被占用";
-		 handler.sendMessage(message_2); 
-		 }
+      }catch (SocketException e) {e.printStackTrace();}
    }
     
     @SimpleFunction(description = "start")//软件向控件写回复信息
     public void sendMessage(String s)
     {
-	 Message message_2 = handler.obtainMessage();
-         message_2.obj = "正在发送";
-         handler.sendMessage(message_2);
 	 k = s.length()/3;
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
 	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];}
+	 Message message_2 = handler.obtainMessage();
+         message_2.obj = "正在发送";
+         handler.sendMessage(message_2);
+	    
 	 try{ ou.write(bb , 1 , k);}catch (IOException e) {
 	 message_2 = handler.obtainMessage();
          message_2.obj = "发送失败";
@@ -140,7 +135,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
                         Message message_2 = handler.obtainMessage();
                         message_2.obj = "连上了！"+socket.getInetAddress().getHostAddress();
                         handler.sendMessage(message_2);
-			ou = null;
 			ou = socket.getOutputStream();
                    	 } 
 		    catch (IOException e) {}
