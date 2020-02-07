@@ -97,11 +97,11 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
 	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];}
 	    
-	 try{ OutputStream.write(bb , 1 , k);OutputStream.flush();}catch (IOException e) {
+	 ou.write(bb , 1 , k);//}catch (IOException e) {
 	 Message message_2 = handler.obtainMessage();
          message_2.obj = "发送失败";
          handler.sendMessage(message_2); 
-	 }
+	 //}
     }
     @SimpleFunction(description = "start")//关闭通信端口
     public void close(){ con = 2; }
