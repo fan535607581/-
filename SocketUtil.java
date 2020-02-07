@@ -52,6 +52,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     private Context context;
     private ServerSocket serverSocket = null;
     OutputStream ou = null;//系统输出流
+    Socket socket2 = null;
 	
     String ip;//系统返回IP地址
     int port;//系统返回端口
@@ -96,7 +97,11 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 k = s.length()/3;
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
 	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];}  
-	 con=1;
+	 //con=1;
+	    try{     
+               ou = socket2.getOutputStream();
+               ou.write(bb , 1 , k);
+               ou.flush();}
     }
     @SimpleFunction(description = "start")//关闭通信端口
     public void close(){ con = 2; }
@@ -121,12 +126,9 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 
                 while (true)
 		{
-			message_1 = handler.obtainMessage();
-                	message_1.obj = "标记004";
-                	handler.sendMessage(message_1);
                     Socket socket = null;
                     try {
-                        socket = serverSocket.accept();
+                        socket = serverSocket.accept(); socket2 = socket;
                         Message message_2 = handler.obtainMessage();
                         message_2.obj = "连上了！"+socket.getInetAddress().getHostAddress();
                         handler.sendMessage(message_2);
@@ -148,13 +150,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    {
                 while(true)
 		{
-			message_2 = handler.obtainMessage();
-			message_2.obj = "标记001";
-			handler.sendMessage(message_2);
-			
-                    if(con==1){message_2 = handler.obtainMessage();
-				message_2.obj = "正在发送";
-				handler.sendMessage(message_2);}
 		    try{
                        if(con==1){       
                        ou = socket.getOutputStream();
