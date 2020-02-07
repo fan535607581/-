@@ -121,6 +121,9 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 
                 while (true)
 		{
+			message_1 = handler.obtainMessage();
+                	message_1.obj = "标记004";
+                	handler.sendMessage(message_1);
                     Socket socket = null;
                     try {
                         socket = serverSocket.accept();
@@ -129,9 +132,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
                         handler.sendMessage(message_2);
                    	 } 
 		    catch (IOException e) {}
-			Message message_2 = handler.obtainMessage();
-			message_2.obj = "标记002";
-			handler.sendMessage(message_2);
                     new ServerThread(socket).start();
                 }
             }
