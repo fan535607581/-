@@ -52,7 +52,14 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     private Context context;
     private ServerSocket serverSocket = null;
     OutputStream ou = null;//系统输出流
+    Socket socket1 = null;
     Socket socket2 = null;
+    Socket socket3 = null;
+    Socket socket4 = null;
+    Socket socket5 = null;
+    Socket socket6 = null;
+    int khd = 0;//客户端计数
+    int kh = 0;//客户端标记
 	
     String ip;//系统返回IP地址
     int port;//系统返回端口
@@ -98,7 +105,13 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
 	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];}  
 	 con=1;
-	 new ServerThread(socket2).start();   
+	 
+	 if(kh == 1){new ServerThread(socket1).start();}
+	 if(kh == 2){new ServerThread(socket2).start();}
+	 if(kh == 3){new ServerThread(socket3).start();}
+	 if(kh == 4){new ServerThread(socket4).start();}
+	 if(kh == 5){new ServerThread(socket5).start();}
+	 if(kh == 6){new ServerThread(socket6).start();}
     }
     @SimpleFunction(description = "start")//关闭通信端口
     public void close(){ con = 2; }
@@ -125,9 +138,19 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 		{
                     Socket socket = null;
                     try {
-                        socket = serverSocket.accept(); socket2 = socket;
+                        socket = serverSocket.accept();
+			    
+			khd = khd + 1;
+			if(kuf == 7){kud = 1;}
+			if(khd == 1){socket1 = socket;}
+			if(khd == 2){socket2 = socket;}
+			if(khd == 3){socket3 = socket;}
+			if(khd == 4){socket4 = socket;}
+			if(khd == 5){socket5 = socket;}
+			if(khd == 6){socket6 = socket;} 
+			    
                         Message message_2 = handler.obtainMessage();
-                        message_2.obj = "连上了！"+socket.getInetAddress().getHostAddress()+socket+socket2;
+                        message_2.obj = "连上了！"+socket.getInetAddress().getHostAddress();
                         handler.sendMessage(message_2);
                    	 } 
 		    catch (IOException e) {}
@@ -157,6 +180,12 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 		    try {
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
 			msy = socket.getInputStream().read(b);
+			if(socket1 == socket) kh = 1;
+			if(socket2 == socket) kh = 2;
+			if(socket3 == socket) kh = 3;
+			if(socket4 == socket) kh = 4;
+			if(socket5 == socket) kh = 5;
+			if(socket6 == socket) kh = 6;
 			if( msy >= 0)	
 			{ 
 			for(int j = 0; j<(b[5]+6) ; j++)
