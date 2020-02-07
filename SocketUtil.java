@@ -146,7 +146,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    {
                 while(true)
 		{
-                    try{if(con == 1){ou.(bb , 1 , k);con=0;}catch (IOException e){}
+                    try{if(con == 1){ou.(bb , 1 , k);con=0;}}catch (IOException e){}
 		    try {
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
 			msy = socket.getInputStream().read(b);
