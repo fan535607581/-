@@ -97,20 +97,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
 	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];}
 	 con = 1;
-	 Thread thread = new Thread()
-	 {
-	    @Override
-            public void run() 
-	    {
-            super.run();
-		    while(true)
-		    {
-		    try{
-			 if(con == 1){ ou.write(bb , 1 , k); con = 0;}
-		       }catch (IOException e) {}
-		    }
-	    }			   	    
-   	};
     }
     @SimpleFunction(description = "start")//关闭通信端口
     public void close(){ con = 2; }
@@ -120,7 +106,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	
     @SimpleFunction(description = "start")//打开通信端口
     public void receiveData(int PORT){
-	DK = PORT;
+	Message message_2; DK = PORT;
         Thread thread = new Thread(){
             @Override
             public void run() {
@@ -129,9 +115,9 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 		catch (IOException e) { e.printStackTrace();}
                 
                 getLocalIpAddress(serverSocket);
-                Message message_1 = handler.obtainMessage();
-                message_1.obj = "IP:" + ip + " PORT: " + port;
-                handler.sendMessage(message_1);
+                message_2 = handler.obtainMessage();
+                message_2.obj = "IP:" + ip + " PORT: " + port;
+                handler.sendMessage(message_2);
 
                 while (true)
 		{
@@ -153,16 +139,14 @@ public class SocketUtil extends AndroidNonvisibleComponent {
  }
 	
 	class ServerThread extends Thread{
-
-	    Socket socket;
-	    Message message_2;
-	    public ServerThread(Socket socket){this.socket = socket; }
-		
+	    Socket socket;  Message message_2;
+	    public ServerThread(Socket socket){this.socket = socket; }	
 	    @Override
 	    public void run()
 	    {
                 while(true)
 		{
+                    try{if(con == 1){ou.(bb , 1 , k);con=0;}catch (IOException e){}
 		    try {
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
 			msy = socket.getInputStream().read(b);
@@ -174,6 +158,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				message_2.obj = b[j]&0xff;
 				handler.sendMessage(message_2);
 				}
+                        new ServerThread(socket).start();
 			}
 			} catch (IOException e){}
                 }
