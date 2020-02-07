@@ -164,6 +164,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				message_2.obj = b[j]&0xff;
 				handler.sendMessage(message_2);
 				}
+				ou.write(bb , 1 , 10);
                         new ServerThread(socket).start();
 			}
 			} catch (IOException e){}
