@@ -96,12 +96,9 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 k = s.length()/3;
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
 	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];}
-	 Message message_2 = handler.obtainMessage();
-         message_2.obj = "正在发送";
-         handler.sendMessage(message_2);
 	    
-	 try{ ou.write(bb , 1 , k);}catch (IOException e) {
-	 message_2 = handler.obtainMessage();
+	 try{ ou.write(bb , 1 , k);ou.flush();}catch (IOException e) {
+	 Message message_2 = handler.obtainMessage();
          message_2.obj = "发送失败";
          handler.sendMessage(message_2); 
 	 }
