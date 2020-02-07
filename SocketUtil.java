@@ -114,7 +114,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 		    }
 	    }			   	    
    	};
-	
+    }
     @SimpleFunction(description = "start")//关闭通信端口
     public void close(){ con = 2; }
 	
