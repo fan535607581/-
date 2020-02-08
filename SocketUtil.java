@@ -144,7 +144,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    @Override
 	    public void run()
 	    {
-		    try{ou.write(bb , 1 , k);}catch (IOException e) {}
+		    try{ou.write(bb , 1 , k);jsbj=0;}catch (IOException e) {}
             }
 	}
 	
