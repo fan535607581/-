@@ -113,7 +113,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
             @Override
             public void run() {
                 super.run();
-		jsbj=0;
+		//jsbj=0;
                 try {
 			serverSocket = new ServerSocket(DK);
 		 	getLocalIpAddress(serverSocket);
@@ -122,8 +122,9 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 			handler.sendMessage(message_1);
 		}
 		catch (IOException e) {
+		getLocalIpAddress(serverSocket);
 		Message message_1 = handler.obtainMessage();
-		message_1.obj = "该端口已被占用，请选择其他端口";
+		message_1.obj = "端口已占用\n""IP:" + ip + " PORT: " + port;;
 		handler.sendMessage(message_1);
 		}
                 
@@ -164,8 +165,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    {
                 while(true)
 		{	
-		    if(jsbj == 0)
-		    {
+		   // if(jsbj == 0) {
 		    try {
                 	int msy = 0;  byte[] b = new byte[255];
 			msy = socket.getInputStream().read(b);
@@ -180,7 +180,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				ou = socket.getOutputStream(); jsbj=1;
 			}
 			} catch (IOException e){}
-		    }
+		    //}
                 }
             }
 	}
