@@ -124,7 +124,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 		catch (IOException e) {
 		getLocalIpAddress(serverSocket);
 		Message message_1 = handler.obtainMessage();
-		message_1.obj = "端口已占用\n""IP:" + ip + " PORT: " + port;;
+		message_1.obj = "端口已打开\nIP:" + ip + " PORT: " + port;
 		handler.sendMessage(message_1);
 		}
                 
