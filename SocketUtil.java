@@ -52,6 +52,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     private Context context;
     private ServerSocket serverSocket = null;
     OutputStream ou = null;//系统输出流
+    Socket socket = null;
     Socket socket1 = null;
     Socket socket2 = null;
     Socket socket3 = null;
@@ -105,7 +106,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
 	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];}  
 	 con=1;
-	 new ServerThread(socket1).start();
+	 new ServerThread(socket).start();
     }
     @SimpleFunction(description = "start")//关闭通信端口
     public void close(){ con = 2; }
@@ -130,9 +131,9 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 
                 while (true)
 		{
-                    Socket socket = null;
+                    //Socket socket = null;
                     try {
-                        socket = serverSocket.accept();  socket1=socket; 
+                        socket = serverSocket.accept();  //socket1=socket; 
                         Message message_2 = handler.obtainMessage();
                         message_2.obj = "连上了！"+socket.getInetAddress().getHostAddress();
                         handler.sendMessage(message_2);
@@ -146,7 +147,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
  }
 	
 	class ServerThread extends Thread{
-	    Socket socket; 
+	    //Socket socket; 
 	    Message message_2;
 	    public ServerThread(Socket socket){this.socket = socket; }	
 	    @Override
