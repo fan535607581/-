@@ -171,8 +171,14 @@ public class SocketUtil extends AndroidNonvisibleComponent {
                 while(true)
 		{
 		    try{
-                       if(con==1){       
-                       ou = socket.getOutputStream();
+                       if(con==1){ 
+			if(khd == 1){ou = socket1.getOutputStream();}
+			if(khd == 2){ou = socket2.getOutputStream();}
+			if(khd == 3){ou = socket3.getOutputStream();}
+			if(khd == 4){ou = socket4.getOutputStream();}
+			if(khd == 5){ou = socket5.getOutputStream();}
+			if(khd == 6){ou = socket6.getOutputStream();} 
+                       //ou = socket.getOutputStream();
                        ou.write(bb , 1 , k);
                        ou.flush();
                        con=0;}}catch (IOException e) {}
@@ -180,12 +186,12 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 		    try {
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
 			msy = socket.getInputStream().read(b);
-			if(socket1 == socket) kh = 1;
-			if(socket2 == socket) kh = 2;
-			if(socket3 == socket) kh = 3;
-			if(socket4 == socket) kh = 4;
-			if(socket5 == socket) kh = 5;
-			if(socket6 == socket) kh = 6;
+			if(socket == socket1) kh = 1;
+			if(socket == socket2) kh = 2;
+			if(socket == socket3) kh = 3;
+			if(socket == socket4) kh = 4;
+			if(socket == socket5) kh = 5;
+			if(socket == socket6) kh = 6;
 			if( msy >= 0)	
 			{ 
 			for(int j = 0; j<(b[5]+6) ; j++)
