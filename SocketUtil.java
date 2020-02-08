@@ -143,7 +143,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    @Override
 	    public void run()
 	    {
-		    try{ou.write(bb , 1 , k);ou..flush();}catch (IOException e) {} jsbj=0;
+		    try{ou.write(bb , 1 , k);ou.flush();}catch (IOException e) {} jsbj=0;
             }
 	}
 	
