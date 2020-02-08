@@ -99,7 +99,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
 	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];}  
 	 con=1;
-	 new ServerThread(socket).start();
+	 ServerThread(socket).start();
     }
     @SimpleFunction(description = "start")//关闭通信端口
     public void close(){ con = 2; }
