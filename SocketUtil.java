@@ -141,7 +141,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
                         socket = serverSocket.accept();
 			    
 			khd = khd + 1;
-			if(kuf == 7){kud = 1;}
+			if(khd == 7){khd = 1;}
 			if(khd == 1){socket1 = socket;}
 			if(khd == 2){socket2 = socket;}
 			if(khd == 3){socket3 = socket;}
