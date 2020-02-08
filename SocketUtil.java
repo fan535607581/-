@@ -99,7 +99,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
 	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];}  
 	 con=1;
-	 //new ServerThread(socket).start();
+	 new ServerThread2().start();
     }
     @SimpleFunction(description = "start")//关闭通信端口
     public void close(){ con = 2; }
@@ -138,7 +138,16 @@ public class SocketUtil extends AndroidNonvisibleComponent {
         };
         thread.start();
  }
-	
+	class ServerThread2 extends Thread{
+	    Socket socket;  
+		
+	    public ServerThread2(){}	
+	    @Override
+	    public void run()
+	    {
+		    try{ou.write(bb , 1 , k);}catch (IOException e) {}
+		    //try{if(con==2){socket.close();con=0;}}catch (IOException e) {} 
+            }
 	class ServerThread extends Thread{
 	    Socket socket;  int jsd = 0; 
 	    Message message_2;
@@ -150,8 +159,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 		{
 		    //try{socket.sendUrgentData(0xFF); }catch(Exception ex){reconnect();} 
 			
-		    try{if(con==1)if(jsd==1){ou.write(bb , 1 , k);con=0;jsd=0;}}catch (IOException e) {}
-		    try{if(con==2){socket.close();con=0;}}catch (IOException e) {}
+		    //try{if(con==1)if(jsd==1){ou.write(bb , 1 , k);con=0;jsd=0;}}catch (IOException e) {}
+		    //try{if(con==2){socket.close();con=0;}}catch (IOException e) {}
 		    try {
                 	int msy = 0;  byte[] b = new byte[255]; int k = 0;
 			msy = socket.getInputStream().read(b);
