@@ -53,7 +53,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     private ServerSocket serverSocket = null;
     OutputStream ou = null;//系统输出流
     Socket socket = null;
-    int khd = 0;//客户端
+    int jsbj = 0; //接收标记（未回复）
 	
     String ip;//系统返回IP地址
     int port;//系统返回端口
@@ -98,7 +98,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 k = s.length()/3;
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
 	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];}  
-	 con=1;
 	 new ServerThread2().start();
     }
     @SimpleFunction(description = "start")//关闭通信端口
@@ -110,7 +109,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     @SimpleFunction(description = "start")//打开通信端口
     public void receiveData(int PORT){
 	DK = PORT;
-        Thread thread = new Thread(){
+        Thread thread = new Thread(){//等待客户端连接的进程
             @Override
             public void run() {
                 super.run();
@@ -138,31 +137,33 @@ public class SocketUtil extends AndroidNonvisibleComponent {
         };
         thread.start();
  }
-	class ServerThread2 extends Thread{
+	class ServerThread2 extends Thread//输出回复信息的进程
+	{
 	    Socket socket;  
-		
 	    public ServerThread2(){}	
 	    @Override
 	    public void run()
 	    {
 		    try{ou.write(bb , 1 , k);}catch (IOException e) {}
-		    //try{if(con==2){socket.close();con=0;}}catch (IOException e) {} 
-            }}
-	class ServerThread extends Thread{
-	    Socket socket;  int jsd = 0; 
+            }
+	}
+	
+	class ServerThread extends Thread//接收数据的进程
+	{
+	    Socket socket;  int runb = 1;
 	    Message message_2;
 	    public ServerThread(Socket socket){this.socket = socket; }	
 	    @Override
 	    public void run()
 	    {
-                while(true)
+                while(runb)//while(true)
 		{
-		    //try{socket.sendUrgentData(0xFF); }catch(Exception ex){reconnect();} 
+		    try{socket.sendUrgentData(0xFF); }catch(Exception ex){rund=0;} 
 			
-		    //try{if(con==1)if(jsd==1){ou.write(bb , 1 , k);con=0;jsd=0;}}catch (IOException e) {}
-		    //try{if(con==2){socket.close();con=0;}}catch (IOException e) {}
+		    if(jsbj == 0)
+		    {
 		    try {
-                	int msy = 0;  byte[] b = new byte[255]; int k = 0;
+                	int msy = 0;  byte[] b = new byte[255];
 			msy = socket.getInputStream().read(b);
 			if( msy >= 0)	
 			{ 
@@ -172,9 +173,10 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				message_2.obj = b[j]&0xff;
 				handler.sendMessage(message_2);
 				}
-				ou = socket.getOutputStream(); jsd = 1;
+				ou = socket.getOutputStream(); jsbj=1;
 			}
 			} catch (IOException e){}
+		    }
                 }
             }
 	}
