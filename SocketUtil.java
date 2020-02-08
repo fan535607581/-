@@ -158,7 +158,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    {
                 while(runb)//while(true)
 		{
-		    try{socket.sendUrgentData(0xFF); }catch(IOException e){rund=false;} 
+		    try{socket.sendUrgentData(0xFF); }catch(IOException e){runb=false;} 
 			
 		    if(jsbj == 0)
 		    {
