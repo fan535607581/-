@@ -147,7 +147,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    {
 		    try{ou.write(bb , 1 , k);}catch (IOException e) {}
 		    //try{if(con==2){socket.close();con=0;}}catch (IOException e) {} 
-            }
+            }}
 	class ServerThread extends Thread{
 	    Socket socket;  int jsd = 0; 
 	    Message message_2;
