@@ -147,7 +147,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
  }
 	
 	class ServerThread extends Thread{
-	    //Socket socket; 
+	    Socket socket; 
 	    Message message_2;
 	    public ServerThread(Socket socket){this.socket = socket; }	
 	    @Override
