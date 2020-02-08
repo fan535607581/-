@@ -150,7 +150,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	
 	class ServerThread extends Thread//接收数据的进程
 	{
-	    Socket socket;  boolean runb = 1;
+	    Socket socket;  boolean runb = true;
 	    Message message_2;
 	    public ServerThread(Socket socket){this.socket = socket; }	
 	    @Override
@@ -158,7 +158,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    {
                 while(runb)//while(true)
 		{
-		    try{socket.sendUrgentData(0xFF); }catch(Exception ex){rund=0;} 
+		    try{socket.sendUrgentData(0xFF); }catch(Exception ex){rund=false;} 
 			
 		    if(jsbj == 0)
 		    {
