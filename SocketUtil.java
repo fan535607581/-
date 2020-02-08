@@ -96,7 +96,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     {
 	 k = s.length()/3;
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
-	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];}  
+	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];} 
+	 con=1;
 	 new ServerThread2().start();
     }
     @SimpleFunction(description = "start")//关闭通信端口
@@ -112,6 +113,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
             @Override
             public void run() {
                 super.run();
+		serverSocket.close();jsbj=0;
                 try { serverSocket = new ServerSocket(DK);}
 		catch (IOException e) { e.printStackTrace();}
                 
@@ -124,7 +126,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 		{
                     Socket socket = null;
                     try {
-                        socket = serverSocket.accept();  //socket1=socket; 
+                        socket = serverSocket.accept(); 
                         Message message_2 = handler.obtainMessage();
                         message_2.obj = "连上了！"+socket.getInetAddress().getHostAddress();
                         handler.sendMessage(message_2);
@@ -137,13 +139,13 @@ public class SocketUtil extends AndroidNonvisibleComponent {
         thread.start();
  }
 	class ServerThread2 extends Thread//输出回复信息的进程
-	{
-	    Socket socket;  
+	{  
 	    public ServerThread2(){}	
 	    @Override
 	    public void run()
-	    {
-		    try{ou.write(bb , 1 , k);ou.flush();}catch (IOException e) {} jsbj=0;
+	    {    
+		    if(con == 1){try{ou.write(bb , 1 , k);ou.flush();con=0;}catch (IOException e) {} jsbj=0;}
+		    if(con == 2){serverSocket.close();socket.close();con=0;}
             }
 	}
 	
