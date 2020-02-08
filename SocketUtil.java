@@ -113,7 +113,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
             @Override
             public void run() {
                 super.run();
-		serverSocket.close();jsbj=0;
+		try{serverSocket.close();}catch (IOException e) {}jsbj=0;
                 try { serverSocket = new ServerSocket(DK);}
 		catch (IOException e) { e.printStackTrace();}
                 
@@ -145,7 +145,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    public void run()
 	    {    
 		    if(con == 1){try{ou.write(bb , 1 , k);ou.flush();}catch (IOException e) {} jsbj=0;}
-		    if(con == 2){try{serverSocket.close();}catch (IOException e) {}}
+		    if(con == 2){try{serverSocket.close();}catch (IOException e) {}jsbj=0;}
             }
 	}
 	
