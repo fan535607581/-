@@ -113,15 +113,20 @@ public class SocketUtil extends AndroidNonvisibleComponent {
             @Override
             public void run() {
                 super.run();
-		try{serverSocket.close();}catch (IOException e) {}jsbj=0;
-                try { serverSocket = new ServerSocket(DK);}
-		catch (IOException e) { e.printStackTrace();}
+		jsbj=0;
+                try {
+			serverSocket = new ServerSocket(DK);
+		 	getLocalIpAddress(serverSocket);
+			Message message_1 = handler.obtainMessage();
+			message_1.obj = "IP:" + ip + " PORT: " + port;
+			handler.sendMessage(message_1);
+		}
+		catch (IOException e) {
+		Message message_1 = handler.obtainMessage();
+		message_1.obj = "该端口已被占用，请选择其他端口";
+		handler.sendMessage(message_1);
+		}
                 
-                getLocalIpAddress(serverSocket);
-                Message message_1 = handler.obtainMessage();
-                message_1.obj = "IP:" + ip + " PORT: " + port;
-                handler.sendMessage(message_1);
-
                 while (true)
 		{
                     Socket socket = null;
