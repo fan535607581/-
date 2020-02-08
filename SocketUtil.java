@@ -132,7 +132,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 		{
                     Socket socket = null;
                     try {
-                        socket = serverSocket.accept();   
+                        socket = serverSocket.accept();  socket1=socket; 
                         Message message_2 = handler.obtainMessage();
                         message_2.obj = "连上了！"+socket.getInetAddress().getHostAddress();
                         handler.sendMessage(message_2);
@@ -166,7 +166,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 			msy = socket.getInputStream().read(b);
 			if( msy >= 0)	
 			{ 
-			socket1=socket;
 			for(int j = 0; j<(b[5]+6) ; j++)
 				{
 				message_2 = handler.obtainMessage();
