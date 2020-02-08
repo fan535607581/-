@@ -52,7 +52,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     private Context context;
     private ServerSocket serverSocket = null;
     OutputStream ou = null;//系统输出流
-    Socket socket = null;
     int jsbj = 0; //接收标记（未回复）
 	
     String ip;//系统返回IP地址
@@ -123,7 +122,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 
                 while (true)
 		{
-                    //Socket socket = null;
+                    Socket socket = null;
                     try {
                         socket = serverSocket.accept();  //socket1=socket; 
                         Message message_2 = handler.obtainMessage();
@@ -144,7 +143,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    @Override
 	    public void run()
 	    {
-		    try{ou.write(bb , 1 , k);jsbj=0;}catch (IOException e) {}
+		    try{ou.write(bb , 1 , k);ou..flush();}catch (IOException e) {} jsbj=0;
             }
 	}
 	
