@@ -139,19 +139,12 @@ public class SocketUtil extends AndroidNonvisibleComponent {
  }
 	class ServerThread2 extends Thread//输出回复信息的进程
 	{ 
-	    OutputStream out = null;//系统输出流
-	    Socket socket; 
-	    boolean mm = true;
-	    public ServerThread2(Socket socket){this.socket = socket;}	
+	    public ServerThread2(){}	
 	    @Override
 	    public void run()
 	    {
-		try{out = socket.getOutputStream();}catch (IOException e) {}
-		while(mm)
-		{	 
-		 if(con == 1){try{out.write(bb , 1 , k);out.flush();}catch (IOException e) {}con=0;mm=false;}
-		 if(con == 2){try{socket.close();}catch (IOException e) {}con=0;mm=false;}
-		}
+		 if(con == 1){try{out.write(bb , 1 , k);out.flush();}catch (IOException e) {}}
+		 if(con == 2){try{socket.close();}catch (IOException e) {}}
             }
 	}
 	
@@ -176,8 +169,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				message_2.obj = b[j]&0xff;
 				handler.sendMessage(message_2);
 				}
-				//ou = socket.getOutputStream();
-				new ServerThread2(socket).start();
+				ou = socket.getOutputStream();
 			}
 			} catch (IOException e){}
                 }
