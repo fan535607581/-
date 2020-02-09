@@ -112,13 +112,14 @@ public class SocketUtil extends AndroidNonvisibleComponent {
             @Override
             public void run() {
                 super.run();
-		    
-		serverSocket = new ServerSocket(DK);
-		getLocalIpAddress(serverSocket);
-		Message message_1 = handler.obtainMessage();
-		message_1.obj = "IP:" + ip + " PORT: " + port;
-		handler.sendMessage(message_1);
-		
+		try {    
+			serverSocket = new ServerSocket(DK);
+			getLocalIpAddress(serverSocket);
+			Message message_1 = handler.obtainMessage();
+			message_1.obj = "IP:" + ip + " PORT: " + port;
+			handler.sendMessage(message_1);
+		}catch (IOException e) {}
+
                 while (true)
 		{
                     Socket socket = null;
@@ -142,8 +143,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    public ServerThread2(Socket socket){this.socket = socket;}	
 	    @Override
 	    public void run()
-	    { 
-		out = socket.getOutputStream();
+	    {
+		try{out = socket.getOutputStream();}catch (IOException e) {}
 		while(true)
 		{	 
 		 if(con == 1)if(ou == out){try{ou.write(bb , 1 , k);ou.flush();}catch (IOException e) {}con=0;}
