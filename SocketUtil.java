@@ -92,7 +92,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
    }
     
     @SimpleFunction(description = "start")//软件向控件写回复信息
-    public void sendMessage(String s)
+    //public void sendMessage(String s)
+    public void 发送消息(String s)
     {
 	 k = s.length()/3;
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
