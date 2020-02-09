@@ -101,7 +101,10 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 new ServerThread2().start();
     }
     @SimpleFunction(description = "start")//断开客户端
-    public void close(){con = 2;}
+    public void Client.closer(){con = 2;}
+	
+    @SimpleFunction(description = "start")//关闭服务器
+    public void Server.close(String s){serverSocket.close();}
 	
     @SimpleEvent//向软件输出信息
     public void GetMessage(String s){ EventDispatcher.dispatchEvent(this, "GetMessage", s); }
