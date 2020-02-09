@@ -97,10 +97,10 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
 	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];} 
 	 con=1;
-	 new ServerThread2().start();
+	 //new ServerThread2().start();
     }
     @SimpleFunction(description = "start")//关闭通信端口
-    public void close(){ con = 2; new ServerThread2().start();}
+    public void close(){ con = 2;}
 	
     @SimpleEvent//向软件输出信息
     public void GetMessage(String s){ EventDispatcher.dispatchEvent(this, "GetMessage", s); }
@@ -112,19 +112,13 @@ public class SocketUtil extends AndroidNonvisibleComponent {
             @Override
             public void run() {
                 super.run();
+		    
 		serverSocket = new ServerSocket(DK);
 		getLocalIpAddress(serverSocket);
 		Message message_1 = handler.obtainMessage();
 		message_1.obj = "IP:" + ip + " PORT: " + port;
 		handler.sendMessage(message_1);
-		/*}
-		catch (IOException e) {
-		getLocalIpAddress(serverSocket);
-		Message message_1 = handler.obtainMessage();
-		message_1.obj = "端口已打开\nIP:" + ip + " PORT: " + port;
-		handler.sendMessage(message_1);
-		}*/
-                
+		
                 while (true)
 		{
                     Socket socket = null;
@@ -143,13 +137,18 @@ public class SocketUtil extends AndroidNonvisibleComponent {
  }
 	class ServerThread2 extends Thread//输出回复信息的进程
 	{ 
+	    OutputStream out = null;//系统输出流
 	    Socket socket; 
 	    public ServerThread2(Socket socket){this.socket = socket;}	
 	    @Override
 	    public void run()
-	    {    
-		 if(con == 1){try{ou.write(bb , 1 , k);ou.flush();}catch (IOException e) {}}
-		 if(con == 2){try{serverSocket.close();}catch (IOException e) {}}
+	    { 
+		out = socket.getOutputStream();
+		while(true)
+		{	 
+		 if(con == 1)if(ou == out){try{ou.write(bb , 1 , k);ou.flush();}catch (IOException e) {}con=0;}
+		 if(con == 2){try{socket.close();}catch (IOException e) {}con=0;}
+		}
             }
 	}
 	
@@ -161,6 +160,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    @Override
 	    public void run()
 	    {
+		new ServerThread2(socket).start();
                 while(true)
 		{	
 		    try {
