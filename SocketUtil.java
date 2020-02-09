@@ -101,7 +101,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 new ServerThread2().start();
     }
     @SimpleFunction(description = "start")//关闭通信端口
-    public void close(){ con = 2; }
+    public void close(){ con = 2; new ServerThread2().start();}
 	
     @SimpleEvent//向软件输出信息
     public void GetMessage(String s){ EventDispatcher.dispatchEvent(this, "GetMessage", s); }
@@ -150,7 +150,19 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    @Override
 	    public void run()
 	    {    
-		    if(con == 1){try{ou.write(bb , 1 , k);ou.flush();}catch (IOException e) {} jsbj=0;}
+		    if(con == 1)
+		    {
+			try{
+			   ou.write(bb , 1 , k);
+			   ou.flush();
+			   }catch (IOException e) 
+				{
+				Message message_2 = handler.obtainMessage();
+				message_2.obj = "发送失败";
+				handler.sendMessage(message_2);
+				}
+			   jsbj=0;
+		    }
 		    if(con == 2){try{serverSocket.close();}catch (IOException e) {}jsbj=0;}
             }
 	}
