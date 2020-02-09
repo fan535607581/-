@@ -47,7 +47,7 @@ import java.util.Enumeration;
 
 public class SocketUtil extends AndroidNonvisibleComponent {
     public static final int VERSION = 1;//控件版本号
-    private static final String LOG_TAG = "SocketUtil";
+    private static final String LOG_TAG = "ModbusTCP服务器";
     private ComponentContainer container;
     private Context context;
     private ServerSocket serverSocket = null;
@@ -104,7 +104,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     public void Clientclose(){con = 2;}
 	
     @SimpleFunction(description = "start")//关闭服务器
-    public void Serverclose(){serverSocket.close();}
+    public void Serverclose(){try{serverSocket.close();}catch (IOException e) {}}
 	
     @SimpleEvent//向软件输出信息
     public void GetMessage(String s){ EventDispatcher.dispatchEvent(this, "GetMessage", s); }
@@ -145,11 +145,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	{ 
 	    public ServerThread2(){}	
 	    @Override
-	    public void run()
-	    {
-		 try{ou.write(bb , 1 , k);ou.flush();}catch (IOException e) {}
-		 //if(con == 2){try{socket.close();}catch (IOException e) {}}
-            }
+	    public void run(){ try{ou.write(bb , 1 , k);ou.flush();}catch (IOException e){} }
 	}
 	
 	class ServerThread extends Thread//接收数据的进程
