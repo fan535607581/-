@@ -52,6 +52,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     private Context context;
     private ServerSocket serverSocket = null;
     OutputStream ou = null;//系统输出流
+    int KH = 0;
 	
     String ip;//系统返回IP地址
     int port;//系统返回端口
@@ -147,7 +148,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 		try{out = socket.getOutputStream();}catch (IOException e) {}
 		while(true)
 		{	 
-		 if(con == 1)if(ou == out){try{ou.write(bb , 1 , k);ou.flush();}catch (IOException e) {}con=0;}
+		 if(con == 1)if(ou == out){try{ou.write(bb , 1 , k);ou.flush();}catch (IOException e) {}con=0;KH=0;}
 		 if(con == 2){try{socket.close();}catch (IOException e) {}con=0;}
 		}
             }
@@ -175,7 +176,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				message_2.obj = b[j]&0xff;
 				handler.sendMessage(message_2);
 				}
-				ou = socket.getOutputStream();
+				if(KH == 0){ou = socket.getOutputStream();KH=1;}
 			}
 			} catch (IOException e){}
                 }
