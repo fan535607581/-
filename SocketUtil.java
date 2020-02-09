@@ -52,7 +52,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     private Context context;
     private ServerSocket serverSocket = null;
     OutputStream ou = null;//系统输出流
-    int jsbj = 0; //接收标记（未回复）
 	
     String ip;//系统返回IP地址
     int port;//系统返回端口
@@ -113,20 +112,18 @@ public class SocketUtil extends AndroidNonvisibleComponent {
             @Override
             public void run() {
                 super.run();
-		jsbj=0;
-                try {
-			serverSocket = new ServerSocket(DK);
-		 	getLocalIpAddress(serverSocket);
-			Message message_1 = handler.obtainMessage();
-			message_1.obj = "IP:" + ip + " PORT: " + port;
-			handler.sendMessage(message_1);
-		}
+		serverSocket = new ServerSocket(DK);
+		getLocalIpAddress(serverSocket);
+		Message message_1 = handler.obtainMessage();
+		message_1.obj = "IP:" + ip + " PORT: " + port;
+		handler.sendMessage(message_1);
+		/*}
 		catch (IOException e) {
 		getLocalIpAddress(serverSocket);
 		Message message_1 = handler.obtainMessage();
 		message_1.obj = "端口已打开\nIP:" + ip + " PORT: " + port;
 		handler.sendMessage(message_1);
-		}
+		}*/
                 
                 while (true)
 		{
@@ -145,25 +142,14 @@ public class SocketUtil extends AndroidNonvisibleComponent {
         thread.start();
  }
 	class ServerThread2 extends Thread//输出回复信息的进程
-	{  
-	    public ServerThread2(){}	
+	{ 
+	    Socket socket; 
+	    public ServerThread2(Socket socket){this.socket = socket;}	
 	    @Override
 	    public void run()
 	    {    
-		    if(con == 1)
-		    {
-			try{
-			   ou.write(bb , 1 , k);
-			   ou.flush();
-			   }catch (IOException e) 
-				{
-				Message message_2 = handler.obtainMessage();
-				message_2.obj = "发送失败";
-				handler.sendMessage(message_2);
-				}
-			   jsbj=0;
-		    }
-		    if(con == 2){try{serverSocket.close();}catch (IOException e) {}jsbj=0;}
+		 if(con == 1){try{ou.write(bb , 1 , k);ou.flush();}catch (IOException e) {}}
+		 if(con == 2){try{serverSocket.close();}catch (IOException e) {}}
             }
 	}
 	
@@ -177,8 +163,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    {
                 while(true)
 		{	
-		   if(jsbj == 0) 
-		   {
 		    try {
                 	int msy = 0;  byte[] b = new byte[255];
 			msy = socket.getInputStream().read(b);
@@ -193,7 +177,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				ou = socket.getOutputStream(); jsbj=1;
 			}
 			} catch (IOException e){}
-		    }
                 }
             }
 	}
