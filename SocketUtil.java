@@ -97,11 +97,11 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	 k = s.length()/3;
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
 	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];} 
-	 con=1;
+	 //con=1;
 	 new ServerThread2().start();
     }
-    @SimpleFunction(description = "start")//关闭通信端口
-    public void close(){con = 2;new ServerThread2().start();}
+    @SimpleFunction(description = "start")//断开客户端
+    public void close(){con = 2;}
 	
     @SimpleEvent//向软件输出信息
     public void GetMessage(String s){ EventDispatcher.dispatchEvent(this, "GetMessage", s); }
@@ -131,6 +131,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
                         handler.sendMessage(message_2);
                    	 } 
 		    catch (IOException e) {}
+		    con=0;
                     new ServerThread(socket).start();
                 }
             }
@@ -143,8 +144,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    @Override
 	    public void run()
 	    {
-		 if(con == 1){try{out.write(bb , 1 , k);out.flush();}catch (IOException e) {}}
-		 if(con == 2){try{socket.close();}catch (IOException e) {}}
+		 try{ou.write(bb , 1 , k);ou.flush();}catch (IOException e) {}
+		 //if(con == 2){try{socket.close();}catch (IOException e) {}}
             }
 	}
 	
@@ -171,6 +172,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				}
 				ou = socket.getOutputStream();
 			}
+			if(con == 2){try{socket.close();}catch (IOException e) {}}
 			} catch (IOException e){}
                 }
             }
