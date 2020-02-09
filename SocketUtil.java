@@ -141,15 +141,16 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	{ 
 	    OutputStream out = null;//系统输出流
 	    Socket socket; 
+	    bool mm = true;
 	    public ServerThread2(Socket socket){this.socket = socket;}	
 	    @Override
 	    public void run()
 	    {
 		try{out = socket.getOutputStream();}catch (IOException e) {}
-		while(true)
+		while(mm)
 		{	 
-		 if(con == 1)if(ou == out){try{ou.write(bb , 1 , k);ou.flush();}catch (IOException e) {}con=0;KH=0;}
-		 if(con == 2){try{socket.close();}catch (IOException e) {}con=0;}
+		 if(con == 1){try{out.write(bb , 1 , k);out.flush();}catch (IOException e) {}con=0;mm=false}
+		 if(con == 2){try{socket.close();}catch (IOException e) {}con=0;mm=false}
 		}
             }
 	}
@@ -162,7 +163,6 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    @Override
 	    public void run()
 	    {
-		new ServerThread2(socket).start();
                 while(true)
 		{	
 		    try {
@@ -176,7 +176,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				message_2.obj = b[j]&0xff;
 				handler.sendMessage(message_2);
 				}
-				if(KH == 0){ou = socket.getOutputStream();KH=1;}
+				//ou = socket.getOutputStream();
+				new ServerThread2(socket).start();
 			}
 			} catch (IOException e){}
                 }
