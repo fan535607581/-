@@ -141,7 +141,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	{ 
 	    OutputStream out = null;//系统输出流
 	    Socket socket; 
-	    bool mm = true;
+	    boolean mm = true;
 	    public ServerThread2(Socket socket){this.socket = socket;}	
 	    @Override
 	    public void run()
