@@ -113,7 +113,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
             @Override
             public void run() {
                 super.run();
-		//jsbj=0;
+		jsbj=0;
                 try {
 			serverSocket = new ServerSocket(DK);
 		 	getLocalIpAddress(serverSocket);
@@ -165,7 +165,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    {
                 while(true)
 		{	
-		   // if(jsbj == 0) {
+		   if(jsbj == 0) 
+		   {
 		    try {
                 	int msy = 0;  byte[] b = new byte[255];
 			msy = socket.getInputStream().read(b);
@@ -180,7 +181,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				ou = socket.getOutputStream(); jsbj=1;
 			}
 			} catch (IOException e){}
-		    //}
+		    }
                 }
             }
 	}
