@@ -47,7 +47,7 @@ import java.util.Enumeration;
 
 public class SocketUtil extends AndroidNonvisibleComponent {
     public static final int VERSION = 1;//控件版本号
-    private static final String LOG_TAG = "ModbusTCP服务器";
+    private static final String LOG_TAG = "SocketUtil";
     private ComponentContainer container;
     private Context context;
     private ServerSocket serverSocket = null;
