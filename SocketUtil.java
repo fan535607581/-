@@ -156,7 +156,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    @Override
 	    public void run()
 	    {
-                while(true)
+                while(socket != null)
 		{	
 		    try {
                 	int msy = 0;  byte[] b = new byte[255];
@@ -171,7 +171,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 				}
 				ou = socket.getOutputStream();
 			}
-			if(con == 2){try{socket.close();}catch (IOException e) {}}
+			if(con == 2){try{ou.close;msy.close;socket.close();}catch (IOException e) {}}
 			} catch (IOException e){}
                 }
             }
