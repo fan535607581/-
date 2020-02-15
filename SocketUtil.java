@@ -68,7 +68,7 @@ public class SocketTCPServer extends AndroidNonvisibleComponent {
         public void handleMessage(Message msg){ GetMessage(msg.obj.toString()); }
     };
 	
-    public SocketUtil(ComponentContainer container) 
+    public SocketTCPServer(ComponentContainer container) 
     {
         super(container.$form());
         this.container = container;
