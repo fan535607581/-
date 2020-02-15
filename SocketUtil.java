@@ -37,7 +37,7 @@ import java.net.SocketException;
 import java.util.Enumeration;
 
 
-@DesignerComponent(version = SocketUtil.VERSION,
+@DesignerComponent(version = SocketTCPServer.VERSION,
     description = "made in fan hao jie \n QQ:535607581",
     category = ComponentCategory.EXTENSION,
     nonVisible = true,
@@ -47,7 +47,7 @@ import java.util.Enumeration;
 
 public class SocketTCPServer extends AndroidNonvisibleComponent {
     public static final int VERSION = 1;//控件版本号
-    private static final String LOG_TAG = "SocketUtil";
+    private static final String LOG_TAG = "SocketTCPServer";
     private ComponentContainer container;
     private Context context;
     private ServerSocket serverSocket = null;
