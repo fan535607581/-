@@ -37,11 +37,11 @@ import java.net.SocketException;
 import java.util.Enumeration;
 
 
-@DesignerComponent(version = SocketTCPServer.VERSION,
-    description = "made in fan hao jie \n QQ:535607581",
-    category = ComponentCategory.EXTENSION,
-    nonVisible = true,
-    iconName = "images/extension.png")
+@DesignerComponent(version = SocketTCPServer.VERSION)
+    //description = "made in fan hao jie \n QQ:535607581",
+   //category = ComponentCategory.EXTENSION,
+    //nonVisible = true,
+    //iconName = "images/extension.png")
 
 @SimpleObject(external = true)
 
