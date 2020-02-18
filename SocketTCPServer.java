@@ -92,12 +92,15 @@ public class SocketTCPServer extends AndroidNonvisibleComponent {
    }
     
     @SimpleFunction(description = "start")//软件向控件写回复信息
-    public void sendMessage(String s)
+    //public void sendMessage(String s)
+    public void sendMessage(byte[] s)
     {
-	 k = s.length()/3;
-	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
-	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];} 
+	 //k = s.length()/3;
+	 //for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
+	 //for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];} 
 	 //con=1;
+	 k = s[5]+6; 
+	 bb = s;
 	 new ServerThread2().start();
     }
     @SimpleFunction(description = "start")//断开客户端
