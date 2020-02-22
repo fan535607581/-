@@ -64,6 +64,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     int con = 0;//控制信号
     int DK = 0;//外部设置的端口
     int k = 0;//回复数据的长度
+	int[] i = new int[1000];//回复原始数据
+	 byte[] bb = new byte[1000];//回复数据
     	
     public Handler handler = new Handler()
     {
@@ -97,8 +99,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     @SimpleFunction(description = "start")//软件向控件写回复信息
     public void sendMessage(String s)
     {
-	 int[] i = new int[1000];//回复原始数据
-	 byte[] bb = new byte[1000];//回复数据
+	 //int[] i = new int[1000];//回复原始数据
+	 //byte[] bb = new byte[1000];//回复数据
    
 	 k = s.length()/3;
 	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
