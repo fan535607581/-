@@ -182,8 +182,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	class ServerThread3 extends Thread//输出回复信息的进程333333333333333333333
 	{ 
 	    Socket socket;
-	    int k1; int k2;
-	    public ServerThread3(Socket socket, int k1 , int k2){this.socket=socket;this.k1=k1;this.k2=k2;}	
+	    byte k1; byte k2;
+	    public ServerThread3(Socket socket, byte k1 , byte k2){this.socket=socket;this.k1=k1;this.k2=k2;}	
 	    @Override
 	    public void run()
 	    {
