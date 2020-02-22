@@ -189,8 +189,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    {
 		   while(con != 1){}
 		   con = 0;
-		   if(k1 == bb[0])
-		   if(k2 == bb[1])
+		   if(k1 == bb[1])
+		   if(k2 == bb[2])
 		   {
 		   try{
 			ou = socket.getOutputStream();
