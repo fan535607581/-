@@ -57,7 +57,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     private ComponentContainer container;
     private Context context;
     private ServerSocket serverSocket = null;
-    OutputStream ou = null;//系统输出流
+    //OutputStream ou = null;//系统输出流
 	
     String ip;//系统返回IP地址
     int port;//系统返回端口
@@ -183,6 +183,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	{ 
 	    Socket socket;
 	    byte k1; byte k2;
+            OutputStream ou = null;//系统输出流
+
 	    public ServerThread3(Socket socket, byte k1 , byte k2){this.socket=socket;this.k1=k1;this.k2=k2;}	
 	    @Override
 	    public void run()
