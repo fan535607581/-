@@ -1,237 +1,63 @@
-package ModbusTCPServer;
+package com.AppyKeepScreenOn;
 
-import com.google.appinventor.components.annotations.*;
-import com.google.appinventor.components.common.ComponentCategory;
-import com.google.appinventor.components.runtime.*;
-import com.google.appinventor.components.runtime.util.*;
-import com.google.appinventor.components.runtime.errors.YailRuntimeError;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.Color;
-import android.content.res.ColorStateList;
-import android.view.View;
-import android.graphics.drawable.RippleDrawable;
-import android.graphics.drawable.Drawable;
-
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.app.Activity;
 import android.content.Context;
-import android.view.Menu;
-import android.widget.TextView;
+import android.util.Log;
+import com.google.appinventor.components.annotations.DesignerComponent;
+import com.google.appinventor.components.annotations.SimpleFunction;
+import com.google.appinventor.components.annotations.SimpleObject;
+import com.google.appinventor.components.annotations.SimpleProperty;
+import com.google.appinventor.components.annotations.PropertyCategory;
+import com.google.appinventor.components.annotations.DesignerProperty;
+import com.google.appinventor.components.annotations.UsesLibraries;
+import com.google.appinventor.components.common.ComponentCategory;
+import com.google.appinventor.components.runtime.AndroidNonvisibleComponent;
+import com.google.appinventor.components.runtime.Component;
+import com.google.appinventor.components.runtime.ComponentContainer;
 
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.ServerSocket;
-import java.net.SocketException;
-import java.util.Enumeration;
-
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.io.PrintStream;
-
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.Socket;
-
-@DesignerComponent(version = SocketUtil.VERSION,
-    description = "made in fan hao jie",
+@DesignerComponent(
+    version = 1,
+    description = "AppyKeepScreenOn Tool to keep screen on and turn off again ",
     category = ComponentCategory.EXTENSION,
     nonVisible = true,
-    iconName = "images/extension.png")
+    iconName = "https://static.wixstatic.com/media/64f6cf_16f4423a8dc041a79605de03d7d81f84~mv2.png?  dn=appyico.png"
+)
 
 @SimpleObject(external = true)
-
-public class SocketUtil extends AndroidNonvisibleComponent {
-    public static final int VERSION = 2;//控件版本号
-    private static final String LOG_TAG = "SocketUtil";
+public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Component
+{
+    public static final int VERSION = 1;
     private ComponentContainer container;
     private Context context;
-    private ServerSocket serverSocket = null;
-    OutputStream ou = null;//系统输出流
-	
-    String ip;//系统返回IP地址
-    int port;//系统返回端口
-    int con = 0;//控制信号
-    int DK = 0;//外部设置的端口
-    int k = 0;//回复数据的长度
-    int[] i = new int[1000];//回复原始数据
-    byte[] bb = new byte[1000];//回复数据
-    	
-    public Handler handler = new Handler()
-    {
-        @Override
-        public void handleMessage(Message msg){ GetMessage(msg.obj.toString()); }
-    };
-	
-    public SocketUtil(ComponentContainer container) 
-    {
+    private static final String LOG_TAG = "AppyKeepScreenOn";
+    private final Activity activity;
+    private boolean keepScreenOn = false;
+    private String result;
+    
+    public AppyKeepScreenOn(ComponentContainer container) {
         super(container.$form());
         this.container = container;
-        context = (Context) container.$context();
+        this.context = container.$context();
+        Log.d("AppyKeepScreenOn", "AppyKeepScreenOn Created");
+        this.activity = container.$context();
     }
-	
-    public void getLocalIpAddress(ServerSocket serverSocket){
-      try {
-         for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();){
-                NetworkInterface intf = en.nextElement();
-                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses();    enumIpAddr.hasMoreElements();){
-                    InetAddress inetAddress = enumIpAddr.nextElement();
-                    String mIP = inetAddress.getHostAddress().substring(0, 3);
-                    if(mIP.equals("192")){
-                        ip = inetAddress.getHostAddress();    //获取本地IP
-                        port = serverSocket.getLocalPort();
-                    }
-                }
-            }
-      }catch (SocketException e) {e.printStackTrace();}
-   }
     
-    @SimpleFunction(description = "start")//软件向控件写回复信息
-    public void sendMessage(String s)
-    {
-	 //int[] i = new int[1000];//回复原始数据
-	 //byte[] bb = new byte[1000];//回复数据
-   
-	 k = s.length()/3;
-	 for(int j = 0; j<k ;j++){i[j] = Integer.parseInt(s.substring(j*3,(j+1)*3));}
-	 for(int j = 0; j<k+1 ;j++){bb[j+1] = (byte)i[j];} 
-	 con=1;  
-	 //new ServerThread2(bb).start();
-    }
-    @SimpleFunction(description = "start")//断开客户端
-    public void Clientclose(){con = 2;}
-	
-    @SimpleFunction(description = "start")//关闭服务器
-    public void Serverclose()
-    {
-	 Message message_2;
-	 try{
-	    if(serverSocket != null)
-	    {
-	    serverSocket.close();
-	    message_2 = handler.obtainMessage();
-	    message_2.obj = "服务器已关闭";
-	    handler.sendMessage(message_2);
-	    }
-	 }catch (IOException e) 
-	    {
-	    message_2 = handler.obtainMessage();
-	    message_2.obj = "服务器关闭失败";
-	    handler.sendMessage(message_2);        
-	    }
-    }
-	
-    @SimpleEvent//向软件输出信息
-    public void GetMessage(String s){ EventDispatcher.dispatchEvent(this, "GetMessage", s); }
-	
-    @SimpleFunction(description = "start")//打开通信端口
-    public void receiveData(int PORT){
-	DK = PORT;
-        Thread thread = new Thread(){//等待客户端连接的进程
-            @Override
-            public void run() {
-                super.run();
-		try {    
-			serverSocket = new ServerSocket(DK);
-			getLocalIpAddress(serverSocket);
-			Message message_1 = handler.obtainMessage();
-			message_1.obj = "服务器已开启:" + ip + ":" + port;
-			handler.sendMessage(message_1);
-		}catch (IOException e)
-		{
-			Message message_1 = handler.obtainMessage();
-			message_1.obj = "服务器开启失败，端口被占用";
-			handler.sendMessage(message_1);	
-		}
+    @SimpleProperty(category = PropertyCategory.BEHAVIOR)
+    public String Result() { return this.result;}
 
-                while (true)
-		{
-                    Socket socket = null;
-                    try {
-                        socket = serverSocket.accept();
-			con=0;
-                        new ServerThread(socket).start();  
-			    
-                        Message message_2 = handler.obtainMessage();
-                        message_2.obj = "客户端连接："+socket.getInetAddress().getHostAddress();
-                        handler.sendMessage(message_2);
-                   	 } 
-		    catch (IOException e) {} 
-                }
-            }
-        };
-        thread.start();
- }
-	class ServerThread2 extends Thread//输出回复信息的进程2222222222222222222
-	{ 
-	    byte[] bb = new byte[1000];
-	    public ServerThread2(byte[] bb){this.bb = bb;}	
-	    @Override
-	    public void run(){ try{ou.write(bb , 1 , k);ou.flush();}catch (IOException e){} }
-	}
-	class ServerThread3 extends Thread//输出回复信息的进程333333333333333333333
-	{ 
-	    Socket socket;
-	    byte k1; byte k2;
-            OutputStream out = null;//系统输出流
-
-	    public ServerThread3(Socket socket, byte k1 , byte k2){this.socket=socket;this.k1=k1;this.k2=k2;}	
-	    @Override
-	    public void run()
-	    {
-		   while((k1 != bb[1])|(k2 != bb[2])){}
-		   try{
-			out = socket.getOutputStream();
-			out.write(bb , 1 , k);
-			out.flush();
-		       }catch (IOException e){} 
-	    }
-	}
+    @DesignerProperty(editorType = "boolean",defaultValue = "False")
 	
-	class ServerThread extends Thread//接收数据的进程
+    @SimpleProperty(description = "Check Enable to keep screen active and awake when App has focus. default is FALSE")
+    public void KeepScreenOn(boolean enable)
+    {
+        if(this.keepScreenOn != enable)
 	{
-	    Socket socket;
-	    Message message_2;
-	    public ServerThread(Socket socket){this.socket = socket; }
-	    @Override
-	    public void run()
-	    {
-                while(socket != null)
-		{	
-		    try {
-                	int msy = 0;  byte[] b = new byte[255];
-			msy = socket.getInputStream().read(b);
-			if( msy >= 0)	
-			{ 
-			for(int j = 0; j<(b[5]+6) ; j++)
-				{
-				message_2 = handler.obtainMessage();
-				message_2.obj = b[j]&0xff;
-				handler.sendMessage(message_2);
-				}
-			new ServerThread3(socket,b[0],b[1]).start();
-			}
-			if(con == 2){
-				try{
-				ou.close();
-				socket.close();
-				con=0;
-				message_2 = handler.obtainMessage();
-				message_2.obj ="客户端已断开:"+socket.getInetAddress().getHostAddress();
-				handler.sendMessage(message_2);
-				}catch (IOException e) {}}
-			} catch (IOException e){}
-                }
-            }
-	}
+            this.keepScreenOn = enable;
+            if(enable) {this.container.$form().getWindow().addFlags(128);}
+	    else {this.container.$form().getWindow().clearFlags(128);}
+        }
+   }
+
+    @SimpleProperty(category = PropertyCategory.BEHAVIOR)
+    public boolean KeepScreenOn() {return this.keepScreenOn;}
 }
