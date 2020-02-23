@@ -187,7 +187,7 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    @Override
 	    public void run()
 	    {
-		   while((k1 ！= bb[1])|(k2 ！= bb[2])){}
+		   while((k1 != bb[1])|(k2 != bb[2])){}
 		   try{
 			ou = socket.getOutputStream();
 			ou.write(bb , 1 , k);
