@@ -34,7 +34,8 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
     private boolean keepScreenOn = false;
     private String result;
     
-    public AppyKeepScreenOn(ComponentContainer container) {
+    public AppyKeepScreenOn(ComponentContainer container)
+    {
         super(container.$form());
         this.container = container;
         this.context = container.$context();
@@ -42,7 +43,7 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
         this.activity = container.$context();
     }
     
-    @SimpleProperty(category = PropertyCategory.BEHAVIOR)
+    @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回屏幕是否设置为为常亮状态
     public String Result() { return this.result;}
 
     @DesignerProperty(editorType = "boolean",defaultValue = "False")
@@ -58,6 +59,6 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
         }
    }
 
-    @SimpleProperty(category = PropertyCategory.BEHAVIOR)
+    @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回屏幕是否正在为常亮状态
     public boolean KeepScreenOn() {return this.keepScreenOn;}
 }
