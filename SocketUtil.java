@@ -64,8 +64,8 @@ public class SocketUtil extends AndroidNonvisibleComponent {
     int con = 0;//控制信号
     int DK = 0;//外部设置的端口
     int k = 0;//回复数据的长度
-	int[] i = new int[1000];//回复原始数据
-	 byte[] bb = new byte[1000];//回复数据
+    int[] i = new int[1000];//回复原始数据
+    byte[] bb = new byte[1000];//回复数据
     	
     public Handler handler = new Handler()
     {
@@ -187,17 +187,12 @@ public class SocketUtil extends AndroidNonvisibleComponent {
 	    @Override
 	    public void run()
 	    {
-		   while(con != 1){}
-		   con = 0;
-		   if(k1 == bb[1])
-		   if(k2 == bb[2])
-		   {
+		   while((k1 ！= bb[1])|(k2 ！= bb[2])){}
 		   try{
 			ou = socket.getOutputStream();
 			ou.write(bb , 1 , k);
 			ou.flush();
 		       }catch (IOException e){} 
-		   }
 	    }
 	}
 	
