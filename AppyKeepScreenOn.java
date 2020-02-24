@@ -17,7 +17,7 @@ import com.google.appinventor.components.runtime.ComponentContainer;
 
 @DesignerComponent
 (
-    version = 1,//版本号
+    version = 10,//版本号
     category = ComponentCategory.EXTENSION,//组件类别，常用ComponentCategory.EXTENSION
     nonVisible = true//是否为可见组件
 )
