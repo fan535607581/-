@@ -67,6 +67,6 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
     public int ServerSocket() {return this.kk;}
     
     @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回字符串
-    public String state() { String k = "神话传说" ; return this.k;}
+    public String state() { String k = "mode in fanhaojie" ; return this.k;}
   
 }
