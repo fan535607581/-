@@ -33,7 +33,7 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
     private boolean keepScreenOn = false;//屏幕状态初始为不常亮
     private String result;
     
-    int[] kk = new int[10];
+    int kk=100;
    
     public AppyKeepScreenOn(ComponentContainer container)
     {
@@ -64,6 +64,6 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
     public boolean KeepScreenOn() {return this.keepScreenOn;}
 
     @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回屏幕是否正在为常亮状态
-    public int[] ServerSocket() {return this.kk;}
+    public int ServerSocket() {return this.kk;}
   
 }
