@@ -17,7 +17,8 @@ import com.google.appinventor.components.runtime.ComponentContainer;
 
 @DesignerComponent(
     version = 1,
-    description = "AppyKeepScreenOn Tool to keep screen on and turn off again ",
+    //description = "AppyKeepScreenOn Tool to keep screen on and turn off again ",
+    description = "APP屏幕",
     category = ComponentCategory.EXTENSION,
     nonVisible = true,
     iconName = "https://static.wixstatic.com/media/64f6cf_16f4423a8dc041a79605de03d7d81f84~mv2.png?  dn=appyico.png"
