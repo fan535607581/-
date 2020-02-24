@@ -61,6 +61,12 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
         }
    }
 
+    @DesignerProperty(editorType = "boolean",defaultValue = "ture")//界面屏幕上的选择,布尔型，初始状态为真///////
+    public void close(boolean enable)//设置屏幕状态为关或开
+    {
+        if(ture != enable){kk = 0;}else{kk=1;}
+   }
+
     @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回屏幕是否正在为常亮状态,结果
     public boolean KeepScreenOn() {return this.keepScreenOn;}
 
