@@ -19,7 +19,7 @@ import com.google.appinventor.components.runtime.ComponentContainer;
     version = 1,
     description = " ",
     category = ComponentCategory.EXTENSION,
-    nonVisible = true,
+    nonVisible = true
    // iconName = "https://static.wixstatic.com/media/64f6cf_16f4423a8dc041a79605de03d7d81f84~mv2.png?  dn=appyico.png"
 )
 
