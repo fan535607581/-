@@ -17,10 +17,9 @@ import com.google.appinventor.components.runtime.ComponentContainer;
 
 @DesignerComponent(
     version = 1,
-    description = " ",
+   // description = " ",
     category = ComponentCategory.EXTENSION,
     nonVisible = true
-   // iconName = "https://static.wixstatic.com/media/64f6cf_16f4423a8dc041a79605de03d7d81f84~mv2.png?  dn=appyico.png"
 )
 
 @SimpleObject(external = true)
@@ -29,7 +28,7 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
     public static final int VERSION = 1;
     private ComponentContainer container;
     private Context context;
-    private static final String LOG_TAG = "Screen屏幕";
+    private static final String LOG_TAG = "AppyKeepScreenOn";
     private final Activity activity;
     private boolean keepScreenOn = false;
     private String result;
@@ -47,7 +46,7 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
     public String Result() { return this.result;}
 
     @DesignerProperty(editorType = "boolean",defaultValue = "False")
-	
+	/*
     @SimpleProperty(description = "Check Enable to keep screen active and awake when App has focus. default is FALSE")
     public void KeepScreenOn(boolean enable)
     {
@@ -58,7 +57,7 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
 	    else {this.container.$form().getWindow().clearFlags(128);}
         }
    }
-
+*/
     @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回屏幕是否正在为常亮状态
     public boolean KeepScreenOn() {return this.keepScreenOn;}
 }
