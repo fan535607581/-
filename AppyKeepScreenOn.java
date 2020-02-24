@@ -45,10 +45,10 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
     @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回屏幕是否设置为为常亮状态
     public String Result() { return this.result;}
 
-    @DesignerProperty(editorType = "boolean",defaultValue = "False")
-	/*
+    //@DesignerProperty(editorType = "boolean",defaultValue = "False")
+	
     @SimpleProperty(description = "Check Enable to keep screen active and awake when App has focus. default is FALSE")
-    public void KeepScreenOn(boolean enable)
+    public void KeepScreenOn(boolean enable)//设置屏幕状态为关或开
     {
         if(this.keepScreenOn != enable)
 	{
@@ -57,7 +57,7 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
 	    else {this.container.$form().getWindow().clearFlags(128);}
         }
    }
-*/
+
     @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回屏幕是否正在为常亮状态
     public boolean KeepScreenOn() {return this.keepScreenOn;}
 }
