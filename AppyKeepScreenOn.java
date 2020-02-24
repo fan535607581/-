@@ -17,10 +17,10 @@ import com.google.appinventor.components.runtime.ComponentContainer;
 
 @DesignerComponent(
     version = 1,
-    //description = "AppyKeepScreenOn Tool to keep screen on and turn off again ",
+    description = " ",
     category = ComponentCategory.EXTENSION,
     nonVisible = true,
-    iconName = "https://static.wixstatic.com/media/64f6cf_16f4423a8dc041a79605de03d7d81f84~mv2.png?  dn=appyico.png"
+   // iconName = "https://static.wixstatic.com/media/64f6cf_16f4423a8dc041a79605de03d7d81f84~mv2.png?  dn=appyico.png"
 )
 
 @SimpleObject(external = true)
@@ -33,7 +33,7 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
     private final Activity activity;
     private boolean keepScreenOn = false;
     private String result;
-    /*
+   
     public AppyKeepScreenOn(ComponentContainer container)
     {
         super(container.$form());
@@ -42,7 +42,7 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
         Log.d("AppyKeepScreenOn", "AppyKeepScreenOn Created");
         this.activity = container.$context();
     }
-    */
+
     @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回屏幕是否设置为为常亮状态
     public String Result() { return this.result;}
 
