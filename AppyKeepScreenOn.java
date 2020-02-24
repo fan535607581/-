@@ -60,10 +60,13 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
         }
    }
 
-    @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回屏幕是否正在为常亮状态
+    @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回屏幕是否正在为常亮状态,结果
     public boolean KeepScreenOn() {return this.keepScreenOn;}
 
-    @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回屏幕是否正在为常亮状态
+    @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回数值kk
     public int ServerSocket() {return this.kk;}
+    
+    @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回数值kk
+    public String Result() {return "神话传说";}
   
 }
