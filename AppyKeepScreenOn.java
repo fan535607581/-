@@ -31,7 +31,9 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
     private static final String LOG_TAG = "AppyKeepScreenOn";
     private final Activity activity;
     private boolean keepScreenOn = false;//屏幕状态初始为不常亮
+    private boolean keep = false;//屏幕状态初始为不常亮
     private String result;
+    private String state;
     
     int kk=100;
     String k = "神话传说";
@@ -62,9 +64,11 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
    }
 
     @DesignerProperty(editorType = "boolean",defaultValue = "Ture")//界面屏幕上的选择,布尔型，初始状态为真///////
-    public void close(boolean enable)//设置屏幕状态为关或开
+    public void state(boolean enable)//设置屏幕状态为关或开
     {
-        if(False != enable){kk = 0;}else{kk=1;}
+        this.keep = enable;
+            if(enable) {kk = 0;}
+	    else {kk = 1;}
    }
 
     @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回屏幕是否正在为常亮状态,结果
