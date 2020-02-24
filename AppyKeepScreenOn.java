@@ -34,7 +34,7 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
     private String result;
     
     int kk=100;
-    String k = "mode in fanhaojie";
+    String k = "神话传说";
    
     public AppyKeepScreenOn(ComponentContainer container)
     {
