@@ -17,15 +17,14 @@ import com.google.appinventor.components.runtime.ComponentContainer;
 
 @DesignerComponent
 (
-	version = 1,//版本号
-	category = ComponentCategory.EXTENSION,//组件类别，常用ComponentCategory.EXTENSION
-	nonVisible = true//是否为可见组件
+    category = ComponentCategory.EXTENSION,//组件类别，常用ComponentCategory.EXTENSION
+    nonVisible = true//是否为可见组件
 )
 
 @SimpleObject(external = true)//是否为拓展组件
 public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Component
 {
-    public static final int VERSION = 1;
+    public static final int VERSION = 1;//版本号
     private ComponentContainer container;
     private Context context;
     private static final String LOG_TAG = "AppyKeepScreenOn";
@@ -66,7 +65,7 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
     @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回数值kk
     public int ServerSocket() {return this.kk;}
     
-    @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回数值kk
-    public String Result() {return "神话传说";}
+    @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回字符串
+    public String Result() { String k = "神话传说" ; return this.k;}
   
 }
