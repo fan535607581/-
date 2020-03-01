@@ -72,7 +72,8 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
             if(enable) {kk = 0;}
 	    else {kk = 1;}
    }
-
+   
+ 
     @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回屏幕是否正在为常亮状态,结果
     public boolean KeepScreenOn() {return this.keepScreenOn;}
 
@@ -80,12 +81,9 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
     public int ServerSocket() {return this.kk;}
     
     @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回字符串
-    public String state() {return this.k;}
-  
-}
-
-public class GetCurrentTime {  
-    /*获得当前时间*/  
+    public String state() {return this.k;} 
+    
+    @SimpleProperty(category = PropertyCategory.BEHAVIOR)//系统时间
     public static String getCurrentTime(){  
         Date currentTime = new Date();  
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
@@ -94,3 +92,5 @@ public class GetCurrentTime {
     }  
   
 }  
+
+}
