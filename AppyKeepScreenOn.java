@@ -14,6 +14,8 @@ import com.google.appinventor.components.common.ComponentCategory;
 import com.google.appinventor.components.runtime.AndroidNonvisibleComponent;
 import com.google.appinventor.components.runtime.Component;
 import com.google.appinventor.components.runtime.ComponentContainer;
+import java.text.SimpleDateFormat;  
+import java.util.Date;  
 
 @DesignerComponent
 (
@@ -81,3 +83,14 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
     public String state() {return this.k;}
   
 }
+
+public class GetCurrentTime {  
+    /*获得当前时间*/  
+    public static String getCurrentTime(){  
+        Date currentTime = new Date();  
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+        String dateString = formatter.format(currentTime);  
+        return dateString;  
+    }  
+  
+}  
