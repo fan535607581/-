@@ -84,13 +84,12 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
     public String state() {return this.k;} 
     
     @SimpleProperty(category = PropertyCategory.BEHAVIOR)//系统时间
-    public static String getCurrentTime(){  
+    public static String getCurrentTime()
+    {  
         Date currentTime = new Date();  
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
         String dateString = formatter.format(currentTime);  
         return dateString;  
-    }  
-  
-}  
+    }   
 
 }
