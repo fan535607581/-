@@ -72,12 +72,10 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
         }
    }
 
-    @DesignerProperty(editorType = "boolean",defaultValue = "Ture")//界面屏幕上的选择,布尔型，初始状态为真///////
-    public void state(boolean enable)//设置屏幕状态为关或开
+    @DesignerProperty(editorType = "int",defaultValue = 0)//界面屏幕上的选择,布尔型，初始状态为真///////
+    public void state(int enable)//设置屏幕状态为关或开
     {
-        this.keep = enable;
-            if(enable) {kk = 0;}
-	    else {kk = 1;}
+      
    }
    
  
@@ -98,22 +96,4 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
         String dateString = formatter.format(currentTime);  
         return dateString;  
     } 
-
-    @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回系统mac
-    public Set<String> getMacs() throws SigarException
-   {
-      TreeSet<String> treeSet = new TreeSet<String>();
-      String[] list = sigar.getNetInterfaceList();
-      for (String string : list)
-      {
-         String mac = sigar.getNetInterfaceConfig(string).getHwaddr();
-         if (mac != null)
-         {
-            treeSet.add(mac);
-         }
-      }
-      return treeSet;
-   }
-  
-
 }
