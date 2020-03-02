@@ -15,6 +15,20 @@ import com.google.appinventor.components.runtime.AndroidNonvisibleComponent;
 import com.google.appinventor.components.runtime.Component;
 import com.google.appinventor.components.runtime.ComponentContainer;
 
+import java.net.InetAddress;/////////////////////////系统信息
+import java.util.Set;
+import java.util.TreeSet;
+ 
+import org.hyperic.sigar.CpuInfo;
+import org.hyperic.sigar.FileSystem;
+import org.hyperic.sigar.FileSystemUsage;
+import org.hyperic.sigar.Mem;
+import org.hyperic.sigar.OperatingSystem;
+import org.hyperic.sigar.Sigar;
+import org.hyperic.sigar.SigarException;
+import org.hyperic.sigar.Swap;/////////////////////系统信息
+
+
 import java.text.SimpleDateFormat; //系统时间
 import java.util.Date; //系统时间 
 
@@ -92,6 +106,23 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //系统时间 
         String dateString = formatter.format(currentTime);  
         return dateString;  
-    }   
+    } 
+
+    @SimpleProperty(category = PropertyCategory.BEHAVIOR)//返回系统mac
+    public Set<String> getMacs() throws SigarException
+   {
+      TreeSet<String> treeSet = new TreeSet<String>();
+      String[] list = sigar.getNetInterfaceList();
+      for (String string : list)
+      {
+         String mac = sigar.getNetInterfaceConfig(string).getHwaddr();
+         if (mac != null)
+         {
+            treeSet.add(mac);
+         }
+      }
+      return treeSet;
+   }
+  
 
 }
