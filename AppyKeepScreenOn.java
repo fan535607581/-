@@ -14,8 +14,9 @@ import com.google.appinventor.components.common.ComponentCategory;
 import com.google.appinventor.components.runtime.AndroidNonvisibleComponent;
 import com.google.appinventor.components.runtime.Component;
 import com.google.appinventor.components.runtime.ComponentContainer;
-import java.text.SimpleDateFormat;  
-import java.util.Date;  
+
+import java.text.SimpleDateFormat; //系统时间
+import java.util.Date; //系统时间 
 
 @DesignerComponent
 (
@@ -32,6 +33,7 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
     private Context context;
     private static final String LOG_TAG = "AppyKeepScreenOn";
     private final Activity activity;
+    
     private boolean keepScreenOn = false;//屏幕状态初始为不常亮
     private boolean keep = false;//屏幕状态初始为不常亮
     private String result;
