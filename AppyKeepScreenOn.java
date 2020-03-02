@@ -19,15 +19,6 @@ import java.net.InetAddress;/////////////////////////系统信息
 import java.util.Set;
 import java.util.TreeSet;
  
-import org.hyperic.sigar.CpuInfo;
-import org.hyperic.sigar.FileSystem;
-import org.hyperic.sigar.FileSystemUsage;
-import org.hyperic.sigar.Mem;
-import org.hyperic.sigar.OperatingSystem;
-import org.hyperic.sigar.Sigar;
-import org.hyperic.sigar.SigarException;
-import org.hyperic.sigar.Swap;/////////////////////系统信息
-
 
 import java.text.SimpleDateFormat; //系统时间
 import java.util.Date; //系统时间 
