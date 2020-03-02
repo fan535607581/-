@@ -72,7 +72,7 @@ public class AppyKeepScreenOn extends AndroidNonvisibleComponent implements Comp
         }
    }
 
-    @DesignerProperty(editorType = "int",defaultValue = "0")//界面屏幕上的选择,布尔型，初始状态为真///////
+    @DesignerProperty(editorType = "int",defaultValue = "0")//界面屏幕上输入具体数值
     public void state(int enable)//设置屏幕状态为关或开
     {
       
