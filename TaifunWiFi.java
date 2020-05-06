@@ -763,7 +763,7 @@ public class TaifunWiFi extends AndroidNonvisibleComponent
       return null;
     }
 
-    private String[] getServersMethodSystemProperties()
+    /*private String[] getServersMethodSystemProperties()
     {
       if (Build.VERSION.SDK_INT < 26)
       {
@@ -800,9 +800,9 @@ public class TaifunWiFi extends AndroidNonvisibleComponent
       }
 
       return null;
-    }
+    }*/
 
-    private String[] getServersMethodExec()
+    /*private String[] getServersMethodExec()
     {
       if (Build.VERSION.SDK_INT >= 16)
       {
@@ -826,7 +826,7 @@ public class TaifunWiFi extends AndroidNonvisibleComponent
       }
 
       return null;
-    }
+    }*/
 
     private Set<String> methodExecParseProps(BufferedReader lineNumberReader)
       throws Exception
