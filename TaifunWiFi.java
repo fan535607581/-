@@ -53,6 +53,14 @@ import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+  
+import android.content.Context;  
+import android.net.wifi.ScanResult;  
+import android.net.wifi.WifiConfiguration;  
+import android.net.wifi.WifiInfo;  
+import android.net.wifi.WifiManager;  
+import android.net.wifi.WifiManager.WifiLock;  
+import android.widget.Toast;
 
 @DesignerComponent(version=14, description="WiFi Manager Extension. Version 14 as of 2019-10-21.", category=ComponentCategory.EXTENSION, nonVisible=true, iconName="https://puravidaapps.com/images/taifun16.png", helpUrl="https://puravidaapps.com/wifi.php")
 @SimpleObject(external=true)
