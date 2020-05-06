@@ -113,6 +113,9 @@ public class TaifunWiFi extends AndroidNonvisibleComponent
   @SimpleFunction(description="Return the local IP Address. Returns wifi ip if its enabled else the cellular one.")
   public String LocalIP()
   {
+    Enumeration en;
+    Enumeration enumIpAddr;
+    
     if (wm.isWifiEnabled())
     {
       WifiInfo wi = wm.getConnectionInfo();
@@ -138,8 +141,8 @@ public class TaifunWiFi extends AndroidNonvisibleComponent
     }
     catch (Exception e)
     {
-      Enumeration en;
-      Enumeration enumIpAddr;
+      //Enumeration en;
+      //Enumeration enumIpAddr;
       return "";
     }
     return "";
