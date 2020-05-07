@@ -287,7 +287,7 @@ public class TaifunWiFi extends AndroidNonvisibleComponent
     List list = wm.getConfiguredNetworks();
     boolean found = false;
     int netId = 0;
-    for (WifiConfiguration i : list) {
+    for (String i : list) {//for (WifiConfiguration i : list) {
       if ((i.SSID != null) && (i.SSID.equals(new StringBuilder().append("\"").append(ssid).append("\"").toString()))) {
         found = true;
         wm.disconnect();
@@ -335,7 +335,7 @@ public class TaifunWiFi extends AndroidNonvisibleComponent
       List ssids = new ArrayList();
 
       if (networks != null) {
-        for (WifiConfiguration result : networks) {
+        for (String result : networks) {//for (WifiConfiguration result : networks) {
           ssids.add(result.SSID.replace("\"", ""));
         }
       }
@@ -362,7 +362,7 @@ public class TaifunWiFi extends AndroidNonvisibleComponent
       String interfaceName = "wlan0";
       try {
         List interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
-        for (NetworkInterface intf : interfaces)
+        for (String intf : interfaces)//for (NetworkInterface intf : interfaces)
           if ((interfaceName == null) || 
             (intf.getName().equalsIgnoreCase(interfaceName)))
           {
