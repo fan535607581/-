@@ -1,4 +1,4 @@
-package com.puravidaapps;
+package TaifunWiFi;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
