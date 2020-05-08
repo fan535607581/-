@@ -287,7 +287,7 @@ public class TaifunWiFi extends AndroidNonvisibleComponent
     List list = wm.getConfiguredNetworks();
     boolean found = false;
     int netId = 0;
-    for (String i : list) {//for (WifiConfiguration i : list) {
+    for (WifiConfiguration i : list) {
       if ((i.SSID != null) && (i.SSID.equals(new StringBuilder().append("\"").append(ssid).append("\"").toString()))) {
         found = true;
         wm.disconnect();
